@@ -13,12 +13,13 @@ public class IniSesionActivity extends AppCompatActivity {
 
     private TwitterDB data;
     private SQLiteDatabase conn;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ini_sesion);
-
+        session = new Session(getApplicationContext());
         data = new TwitterDB(this, "datos", null, 1);
     }
 
@@ -33,6 +34,7 @@ public class IniSesionActivity extends AppCompatActivity {
             Toast.makeText(this, "No coincide", Toast.LENGTH_SHORT);
         }else{
             Intent intent = new Intent(this, TimeLineActivity.class);
+            session.setNomUsuario(correo);
             startActivity(intent);
         }
     }

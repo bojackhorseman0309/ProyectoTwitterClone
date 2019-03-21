@@ -10,11 +10,11 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHolder>{
+public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilViewHolder>{
 
     private List<Tweet> items;
 
-    public static class TweetViewHolder extends RecyclerView.ViewHolder {
+    public static class PerfilViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
         public ImageView imagenPerf;
         public TextView nombre;
@@ -29,18 +29,18 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         public ImageView imagenShare;
 
 
-        public TweetViewHolder(View v) {
+        public PerfilViewHolder(View v) {
             super(v);
             imagenPerf = (ImageView) v.findViewById(R.id.ivPerfilPerfAct);
             nombre = (TextView) v.findViewById(R.id.tvNomCardPerfAct);
             id = (TextView) v.findViewById(R.id.tvIdPerfCardPerfAct);
             tweet = (TextView) v.findViewById(R.id.tvTuitContCardPerfAct);
             imagenRes = (ImageView) v.findViewById(R.id.ivRespondCardPerfAct);
-            contRes = (TextView) v.findViewById(R.id.tvResContCard);
+            contRes = (TextView) v.findViewById(R.id.tvResContCardPerfAct);
             imagenRetw = (ImageView) v.findViewById(R.id.ivRetuitCardPerfAct);
-            contRetw = (TextView) v.findViewById(R.id.tvRetwContCard);
+            contRetw = (TextView) v.findViewById(R.id.tvRetwContCardPerfAct);
             imagenFav = (ImageView) v.findViewById(R.id.ivFavCardPerfAct);
-            contFav = (TextView) v.findViewById(R.id.tvFavContCard);
+            contFav = (TextView) v.findViewById(R.id.tvFavContCardPerfAct);
             imagenShare = (ImageView) v.findViewById(R.id.ivShareCardPerfAct);
 
             ((ImageView)v.findViewById(R.id.ivPerfilPerfAct)).setOnClickListener(new View.OnClickListener() {
@@ -79,10 +79,11 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
             });
 
 
+
         }
     }
 
-    public TweetAdapter(List<Tweet> items) {
+    public PerfilAdapter(List<Tweet> items) {
         this.items = items;
     }
 
@@ -92,14 +93,14 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
     }
 
     @Override
-    public TweetViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public PerfilAdapter.PerfilViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.tweets_card, viewGroup, false);
-        return new TweetViewHolder(v);
+                .inflate(R.layout.perfil_card, viewGroup, false);
+        return new PerfilAdapter.PerfilViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(TweetViewHolder viewHolder, int i) {
+    public void onBindViewHolder(PerfilAdapter.PerfilViewHolder viewHolder, int i) {
         viewHolder.imagenPerf.setImageResource(items.get(i).getImagenPerf());
         viewHolder.nombre.setText(items.get(i).getNomUsuario());
         viewHolder.id.setText(items.get(i).getIdNomUsuario());
@@ -107,7 +108,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         viewHolder.contRes.setText(items.get(i).getContRes());
         viewHolder.contRetw.setText(items.get(i).getContRetw());
         viewHolder.contFav.setText(items.get(i).getContFav());
-    }
 
+    }
 
 }

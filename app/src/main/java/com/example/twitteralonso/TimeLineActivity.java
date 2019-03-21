@@ -2,6 +2,8 @@ package com.example.twitteralonso;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,7 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,11 @@ public class TimeLineActivity extends AppCompatActivity {
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lManager;
+    private String correo;
+    private TwitterDB data;
+    private SQLiteDatabase conn;
+    private Session session;
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -52,17 +61,22 @@ public class TimeLineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_line);
 
+        session = new Session(getApplicationContext());
+
+        data = new TwitterDB(this, "datos", null, 1);
+
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        List<Tweet> items = new ArrayList<>();
+        List<Tweet> items = consultarTuit();
 
-        items.add(new Tweet(
+       /* items.add(new Tweet(
                 R.drawable.ic_launcher_background, "Bojack",
                 "@bojack", "MMMMMMMM",
                 "1", "2",
-                "3"));
+                "3"));*/
 
         // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.rvTimeline);
@@ -77,7 +91,27 @@ public class TimeLineActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
     }
 
+    public void escribirTuit(View view) {
+        Intent intent = new Intent(this, EscribirTweetActivity.class);
+        startActivity(intent);
+    }
 
+    public List<Tweet> consultarTuit() {
+        conn = data.getReadableDatabase();
+        List<Tweet> listaAux = new ArrayList<>();
+        Cursor fila = conn.rawQuery("select * from tweet where nombre = '"+session.getNomUsuario().trim()+"'", null);
+        if (fila.moveToFirst()) {
+            do {
+                listaAux.add(new Tweet(fila.getInt(1), fila.getString(2), fila.getString(3),
+                        fila.getString(4), fila.getString(5), fila.getString(6),
+                        fila.getString(7)));
+            } while (fila.moveToNext());
+        } else {
+            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+        }
+        conn.close();
+        return listaAux;
+    }
 
 
 }
