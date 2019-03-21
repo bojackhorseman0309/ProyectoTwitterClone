@@ -1,5 +1,7 @@
 package com.example.twitteralonso;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -27,16 +29,18 @@ public class TimeLineActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navHome:
-                    mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navBuscar:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    Intent intBuscar = new Intent(getApplicationContext(), BuscarActivity.class);
+                    startActivity(intBuscar);
                     return true;
                 case R.id.navNotif:
-                    mTextMessage.setText(R.string.title_notifications);
+                    Intent intNotif = new Intent(getApplicationContext(), NotificacionesActivity.class);
+                    startActivity(intNotif);
                     return true;
                 case R.id.navMensajes:
-                    mTextMessage.setText(R.string.navMensajes);
+                    Intent intMensaje = new Intent(getApplicationContext(), MensajesActivity.class);
+                    startActivity(intMensaje);
                     return true;
             }
             return false;
@@ -53,6 +57,12 @@ public class TimeLineActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         List<Tweet> items = new ArrayList<>();
+
+        items.add(new Tweet(
+                R.drawable.ic_launcher_background, "Bojack",
+                "@bojack", "MMMMMMMM",
+                "1", "2",
+                "3"));
 
         // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.rvTimeline);

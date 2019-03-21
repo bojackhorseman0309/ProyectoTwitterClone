@@ -1,5 +1,6 @@
 package com.example.twitteralonso;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,8 @@ public class IniSesionActivity extends AppCompatActivity {
 
     public void iniciarSesionVerifica(View view){
 
+        Intent intent = new Intent(this, TimeLineActivity.class);
+        startActivity(intent);
 
 
     }

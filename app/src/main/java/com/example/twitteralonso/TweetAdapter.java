@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
             imagenPerf = (ImageView) v.findViewById(R.id.ivPerfil);
             nombre = (TextView) v.findViewById(R.id.tvNomCard);
             id = (TextView) v.findViewById(R.id.tvIdPerfCard);
-            tweet = (TextView) v.findViewById(R.id.etTuitContCard);
+            tweet = (TextView) v.findViewById(R.id.tvTuitContCard);
             imagenRes = (ImageView) v.findViewById(R.id.ivRespondCard);
             contRes = (TextView) v.findViewById(R.id.tvResContCard);
             imagenRetw = (ImageView) v.findViewById(R.id.ivRetuitCard);

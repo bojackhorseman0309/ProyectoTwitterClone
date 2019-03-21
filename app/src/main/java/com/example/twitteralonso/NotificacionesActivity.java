@@ -21,8 +21,10 @@ public class NotificacionesActivity extends AppCompatActivity {
 
         List<Notificacion> items = new ArrayList<>();
 
+        items.add(new Notificacion(R.drawable.ic_launcher_background, "Nuevo tuit de Alonso", "Callate Bojack"));
+
         // Obtener el Recycler
-        recycler = (RecyclerView) findViewById(R.id.rvTimeline);
+        recycler = (RecyclerView) findViewById(R.id.rvNotificaciones);
         recycler.setHasFixedSize(true);
 
         // Usar un administrador para LinearLayout

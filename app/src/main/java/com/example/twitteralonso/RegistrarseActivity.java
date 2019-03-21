@@ -1,5 +1,6 @@
 package com.example.twitteralonso;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,9 @@ public class RegistrarseActivity extends AppCompatActivity {
     }
 
     public void registroR(View view){
+
+        Intent intent = new Intent(this, IniSesionActivity.class);
+        startActivity(intent);
 
     }
 }

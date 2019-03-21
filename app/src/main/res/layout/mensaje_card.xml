@@ -7,22 +7,22 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/notifCard"
+        android:id="@+id/mensajeCard"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="90dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/ivPerfNotif"
-                android:layout_width="49dp"
-                android:layout_height="47dp"
+                android:id="@+id/ivPerfilMens"
+                android:layout_width="62dp"
+                android:layout_height="66dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -30,24 +30,45 @@
                 tools:srcCompat="@tools:sample/avatars[2]" />
 
             <TextView
-                android:id="@+id/tvNotif"
+                android:id="@+id/tvNomMens"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/ivPerfNotif"
+                app:layout_constraintStart_toEndOf="@+id/ivPerfilMens"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvTweetNotif"
-                android:layout_width="64dp"
-                android:layout_height="18dp"
+                android:id="@+id/tvIdMens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/ivPerfNotif"
-                app:layout_constraintTop_toBottomOf="@+id/tvNotif" />
+                app:layout_constraintStart_toEndOf="@+id/tvNomMens"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvFechaMens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMensajeMens"
+                android:layout_width="311dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                app:layout_constraintStart_toEndOf="@+id/ivPerfilMens"
+                app:layout_constraintTop_toBottomOf="@+id/tvIdMens" />
+
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>
