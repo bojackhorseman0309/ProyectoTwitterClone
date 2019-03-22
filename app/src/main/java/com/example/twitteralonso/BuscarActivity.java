@@ -1,5 +1,6 @@
 package com.example.twitteralonso;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -23,23 +24,10 @@ public class BuscarActivity extends AppCompatActivity {
 
     public void buscarUsuario(View view){
         String nombreBuscado = ((EditText)findViewById(R.id.etBuscarBA)).getText().toString();
-
+        session.setAmigo(nombreBuscado);
+        Intent intent = new Intent(this, PerfilActivity.class);
+        startActivity(intent);
     }
 
-    public void consultarProducto(String nomBusc) {
-        conn = data.getReadableDatabase();
-        boolean entra = false;
 
-        Cursor fila = conn.rawQuery("SELECT * FROM usuario WHERE correo= '"+nomBusc.trim()+"'", null);
-        if (fila.moveToFirst()) {
-            do {
-
-
-            } while (fila.moveToNext());
-
-        } else {
-            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
-        }
-        conn.close();
-    }
 }
