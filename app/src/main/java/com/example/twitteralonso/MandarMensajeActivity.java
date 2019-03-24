@@ -30,7 +30,7 @@ public class MandarMensajeActivity extends AppCompatActivity {
     public void mandarMensaje(View view){
         String dest = ((EditText)findViewById(R.id.etDestinatarioMM)).getText().toString();
         String mensj = ((EditText)findViewById(R.id.etMensajeMM)).getText().toString();
-        String[] nomUsuario = dest.split("@");
+        String[] nomUsuario = session.getNomUsuario().split("@");
 
         insertarMensaje(dest, mensj, nomUsuario[0]);
 
@@ -42,11 +42,11 @@ public class MandarMensajeActivity extends AppCompatActivity {
 
         ContentValues registro = new ContentValues();
         registro.put("imagen", R.drawable.ic_launcher_background);
-        registro.put("nombre", dest);
+        registro.put("nombre", session.getNomUsuario());
         registro.put("idUsuario", idUsuario);
         registro.put("fecha", "hoy");
         registro.put("mensaje", mensj);
-        registro.put("origen", session.getNomUsuario());
+        registro.put("origen", dest);
         conn.insert("mensaje", null, registro);
         conn.close();
 

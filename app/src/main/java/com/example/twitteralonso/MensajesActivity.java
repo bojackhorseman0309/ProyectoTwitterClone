@@ -56,7 +56,7 @@ public class MensajesActivity extends AppCompatActivity {
     public List<Mensaje> consultaMensaje() {
         conn = data.getReadableDatabase();
         List<Mensaje> itemsAux = new ArrayList<>();
-        Cursor fila = conn.rawQuery("SELECT * FROM mensaje WHERE nombre = '"+session.getNomUsuario().trim()+"'", null);
+        Cursor fila = conn.rawQuery("SELECT * FROM mensaje WHERE origen = '"+session.getNomUsuario().trim()+"'", null);
         if (fila.moveToFirst()) {
             do {
 

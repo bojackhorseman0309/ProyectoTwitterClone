@@ -70,13 +70,8 @@ public class TimeLineActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        List<Tweet> items = consultarTuit();
+        List<Tweet> items = mezclaLista();
 
-       /* items.add(new Tweet(
-                R.drawable.ic_launcher_background, "Bojack",
-                "@bojack", "MMMMMMMM",
-                "1", "2",
-                "3"));*/
 
         // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.rvTimeline);
@@ -111,6 +106,53 @@ public class TimeLineActivity extends AppCompatActivity {
         }
         conn.close();
         return listaAux;
+    }
+
+    public List<Tweet> consultarAmigo() {
+        conn = data.getReadableDatabase();
+        List<Tweet> listaAux = new ArrayList<>();
+
+        Cursor fila = conn.rawQuery("SELECT correoAmigo FROM amigo WHERE correoSesion = '"+session.getNomUsuario().trim()+"'", null);
+        if (fila.moveToFirst()) {
+            do {
+
+                listaAux.addAll(consultarTweetAmigo(fila.getString(0)));
+
+            } while (fila.moveToNext());
+
+        } else {
+            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+        }
+        conn.close();
+        return listaAux;
+    }
+
+    public List<Tweet> consultarTweetAmigo(String nomBusc) {
+        conn = data.getReadableDatabase();
+        List<Tweet> listaAmigo = new ArrayList<>();
+
+        Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE nombre = '"+nomBusc.trim()+"'", null);
+        if (fila.moveToFirst()) {
+            do {
+                listaAmigo.add(new Tweet(R.drawable.ic_launcher_background, fila.getString(2),
+                        fila.getString(3), fila.getString(4), fila.getString(5),
+                        fila.getString(6), fila.getString(7)));
+            } while (fila.moveToNext());
+
+        } else {
+            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+        }
+        conn.close();
+        return listaAmigo;
+    }
+
+    public List<Tweet> mezclaLista(){
+        List<Tweet> listaFinal = new ArrayList<>();
+
+        listaFinal.addAll(consultarAmigo());
+        listaFinal.addAll(consultarTuit());
+
+        return listaFinal;
     }
 
 
