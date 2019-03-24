@@ -40,4 +40,13 @@ public class Session {
         return nom;
     }
 
+    public void setAmigoImagen(String nom) {
+        prefs.edit().putString("imagenAmigo", nom).commit();
+    }
+
+    public String getAmigoImagen() {
+        String nom = prefs.getString("imagenAmigo","");
+        return nom;
+    }
+
 }

@@ -7,13 +7,23 @@ public class Mensaje {
     private String idUsuario;
     private String fecha;
     private String mensaje;
+    private String origen;
 
-    public Mensaje(int imagenPerf, String nomUsuario, String idUsuario, String fecha, String mensaje) {
+    public Mensaje(int imagenPerf, String nomUsuario, String idUsuario, String fecha, String mensaje, String origen) {
         this.imagenPerf = imagenPerf;
         this.nomUsuario = nomUsuario;
         this.idUsuario = idUsuario;
         this.fecha = fecha;
         this.mensaje = mensaje;
+        this.origen = origen;
+    }
+
+    public String getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
     }
 
     public int getImagenPerf() {

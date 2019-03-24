@@ -1,11 +1,13 @@
 package com.example.twitteralonso;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -66,5 +68,18 @@ public class PerfilActivity extends AppCompatActivity {
         }
         conn.close();
         return listaTuit;
+    }
+
+
+    public void añadirAmigo(View view){
+        conn = data.getWritableDatabase();
+        ContentValues registro = new ContentValues();
+
+        registro.put("correoSesion", session.getNomUsuario());
+        registro.put("correoAmigo", session.getAmigo());
+
+        conn.insert("amigo", null, registro);
+        conn.close();
+        Toast.makeText(this, "Se ingresó un amigo", Toast.LENGTH_SHORT).show();
     }
 }

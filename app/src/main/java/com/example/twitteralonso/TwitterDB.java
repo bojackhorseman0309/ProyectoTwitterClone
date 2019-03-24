@@ -18,9 +18,10 @@ public class TwitterDB extends SQLiteOpenHelper {
                                         "tweet text, conResp text, contRetw text, contFav text)");
 
         db.execSQL("create table notificacion (idNotif integer primary key, imagen int, notificacion text, descripcion text)");
-        db.execSQL("create table mensaje (idMens integer primary key, imagen int, nombre text, idUsuario text, fecha text, mensaje text)");
+        db.execSQL("create table mensaje (idMens integer primary key, imagen int, nombre text, idUsuario text, fecha text, mensaje text, origen text)");
 
         db.execSQL("create table usuario (idUsuario integer primary key, correo text, contrasenha text)");
+        db.execSQL("create table amigo (idOper integer primary key, correoSesion text, correoAmigo text)");
 
     }
 
@@ -32,9 +33,10 @@ public class TwitterDB extends SQLiteOpenHelper {
                 "tweet text, conResp text, contRetw text, contFav text)");
 
         db.execSQL("create table notificacion (idNotif integer primary key, imagen int, notificacion text, descripcion text)");
-        db.execSQL("create table mensaje (idMens integer primary key, imagen int, nombre text, idUsuario text, fecha text, mensaje text)");
+        db.execSQL("create table mensaje (idMens integer primary key, imagen int, nombre text, idUsuario text, fecha text, mensaje text, origen text)");
 
         db.execSQL("create table usuario (idUsuario integer primary key, correo text, contrasenha text)");
+        db.execSQL("create table amigo (idOper integer primary key, correoSesion text, correoAmigo text)");
     }
 
 }
