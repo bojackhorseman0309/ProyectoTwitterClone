@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class TimeLineActivity extends AppCompatActivity {
     private Session session;
 
 
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -38,6 +38,8 @@ public class TimeLineActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navHome:
+                    Intent home = new Intent(getApplicationContext(), TimeLineActivity.class);
+                    startActivity(home);
                     return true;
                 case R.id.navBuscar:
                     Intent intBuscar = new Intent(getApplicationContext(), BuscarActivity.class);
@@ -60,28 +62,19 @@ public class TimeLineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_line);
-
         session = new Session(getApplicationContext());
-
         data = new TwitterDB(this, "datos", null, 1);
-
-
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         List<Tweet> items = mezclaLista();
 
-
-        // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.rvTimeline);
         recycler.setHasFixedSize(true);
 
-        // Usar un administrador para LinearLayout
         lManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(lManager);
 
-        // Crear un nuevo adaptador
         adapter = new TweetAdapter(items);
         recycler.setAdapter(adapter);
     }
@@ -94,7 +87,7 @@ public class TimeLineActivity extends AppCompatActivity {
     public List<Tweet> consultarTuit() {
         conn = data.getReadableDatabase();
         List<Tweet> listaAux = new ArrayList<>();
-        Cursor fila = conn.rawQuery("select * from tweet where nombre = '"+session.getNomUsuario().trim()+"'", null);
+        Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE nombre = '" + session.getNomUsuario().trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
                 listaAux.add(new Tweet(fila.getInt(1), fila.getString(2), fila.getString(3),
@@ -102,7 +95,7 @@ public class TimeLineActivity extends AppCompatActivity {
                         fila.getString(7)));
             } while (fila.moveToNext());
         } else {
-            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAux;
@@ -112,16 +105,13 @@ public class TimeLineActivity extends AppCompatActivity {
         conn = data.getReadableDatabase();
         List<Tweet> listaAux = new ArrayList<>();
 
-        Cursor fila = conn.rawQuery("SELECT correoAmigo FROM amigo WHERE correoSesion = '"+session.getNomUsuario().trim()+"'", null);
+        Cursor fila = conn.rawQuery("SELECT correoAmigo FROM amigo WHERE correoSesion = '" + session.getNomUsuario().trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
-
                 listaAux.addAll(consultarTweetAmigo(fila.getString(0)));
-
             } while (fila.moveToNext());
-
         } else {
-            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAux;
@@ -131,27 +121,24 @@ public class TimeLineActivity extends AppCompatActivity {
         conn = data.getReadableDatabase();
         List<Tweet> listaAmigo = new ArrayList<>();
 
-        Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE nombre = '"+nomBusc.trim()+"'", null);
+        Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE nombre = '" + nomBusc.trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
                 listaAmigo.add(new Tweet(R.drawable.ic_launcher_background, fila.getString(2),
                         fila.getString(3), fila.getString(4), fila.getString(5),
                         fila.getString(6), fila.getString(7)));
             } while (fila.moveToNext());
-
         } else {
-            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAmigo;
     }
 
-    public List<Tweet> mezclaLista(){
+    public List<Tweet> mezclaLista() {
         List<Tweet> listaFinal = new ArrayList<>();
-
         listaFinal.addAll(consultarAmigo());
         listaFinal.addAll(consultarTuit());
-
         return listaFinal;
     }
 

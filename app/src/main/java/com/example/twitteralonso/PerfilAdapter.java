@@ -10,12 +10,11 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilViewHolder>{
+public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilViewHolder> {
 
     private List<Tweet> items;
 
     public static class PerfilViewHolder extends RecyclerView.ViewHolder {
-        // Campos respectivos de un item
         public ImageView imagenPerf;
         public TextView nombre;
         public TextView id;
@@ -43,41 +42,40 @@ public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilView
             contFav = (TextView) v.findViewById(R.id.tvFavContCardPerfAct);
             imagenShare = (ImageView) v.findViewById(R.id.ivShareCardPerfAct);
 
-            ((ImageView)v.findViewById(R.id.ivPerfilPerfAct)).setOnClickListener(new View.OnClickListener() {
+            ((ImageView) v.findViewById(R.id.ivPerfilPerfAct)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
                 }
             });
 
-            ((ImageView)v.findViewById(R.id.ivRespondCardPerfAct)).setOnClickListener(new View.OnClickListener() {
+            ((ImageView) v.findViewById(R.id.ivRespondCardPerfAct)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
                 }
             });
 
-            ((ImageView)v.findViewById(R.id.ivRetuitCardPerfAct)).setOnClickListener(new View.OnClickListener() {
+            ((ImageView) v.findViewById(R.id.ivRetuitCardPerfAct)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
                 }
             });
 
-            ((ImageView)v.findViewById(R.id.ivFavCardPerfAct)).setOnClickListener(new View.OnClickListener() {
+            ((ImageView) v.findViewById(R.id.ivFavCardPerfAct)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
                 }
             });
 
-            ((ImageView)v.findViewById(R.id.ivShareCardPerfAct)).setOnClickListener(new View.OnClickListener() {
+            ((ImageView) v.findViewById(R.id.ivShareCardPerfAct)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
                 }
             });
-
 
 
         }

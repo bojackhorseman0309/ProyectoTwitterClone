@@ -9,10 +9,10 @@
     <TextView
         android:id="@+id/tvTitutloMM"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="19dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Mandar mensaje"
+        android:text="@string/tvMandarMTit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="mandarMensaje"
-        android:text="Enviar"
+        android:text="@string/btEnviarMensj"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMensajeMM" />
 </android.support.constraint.ConstraintLayout>

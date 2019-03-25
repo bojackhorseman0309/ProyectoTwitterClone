@@ -16,7 +16,6 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
     private List<Notificacion> items;
 
     public static class NotifViewHolder extends RecyclerView.ViewHolder {
-        // Campos respectivos de un item
         public ImageView imagenNotif;
         public TextView notificacion;
         public TextView descripcion;
@@ -27,14 +26,6 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
             imagenNotif = (ImageView) v.findViewById(R.id.ivPerfNotif);
             notificacion = (TextView) v.findViewById(R.id.tvNotif);
             descripcion = (TextView) v.findViewById(R.id.tvTweetNotif);
-
-            ((CardView) v.findViewById(R.id.notifCard)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
-                }
-            });
-
         }
     }
 
@@ -59,7 +50,6 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
         viewHolder.imagenNotif.setImageResource(items.get(i).getImagenNotif());
         viewHolder.notificacion.setText(items.get(i).getNotif());
         viewHolder.descripcion.setText(items.get(i).getDesc());
-
     }
 
 }

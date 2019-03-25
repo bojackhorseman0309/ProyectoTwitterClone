@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,11 +23,16 @@ public class BuscarActivity extends AppCompatActivity {
         data = new TwitterDB(this, "datos", null, 1);
     }
 
-    public void buscarUsuario(View view){
-        String nombreBuscado = ((EditText)findViewById(R.id.etBuscarBA)).getText().toString();
-        session.setAmigo(nombreBuscado);
-        Intent intent = new Intent(this, PerfilActivity.class);
-        startActivity(intent);
+    public void buscarUsuario(View view) {
+        String nombreBuscado = ((EditText) findViewById(R.id.etBuscarBA)).getText().toString();
+        if (TextUtils.isEmpty(nombreBuscado)){
+            Toast.makeText(this, R.string.toastNoNull, Toast.LENGTH_SHORT).show();
+        } else{
+            session.setAmigo(nombreBuscado);
+            Intent intent = new Intent(this, PerfilActivity.class);
+            startActivity(intent);
+        }
+
     }
 
 

@@ -17,7 +17,6 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.MensajeV
     private List<Mensaje> items;
 
     public static class MensajeViewHolder extends RecyclerView.ViewHolder {
-        // Campos respectivos de un item
         public ImageView imagenMens;
         public TextView nomUsuario;
         public TextView idUsuario;
@@ -66,7 +65,5 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.MensajeV
         viewHolder.idUsuario.setText(items.get(i).getIdUsuario());
         viewHolder.fecha.setText(items.get(i).getFecha());
         viewHolder.mensaje.setText(items.get(i).getMensaje());
-
     }
-
 }

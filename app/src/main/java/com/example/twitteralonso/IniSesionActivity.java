@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,18 +29,22 @@ public class IniSesionActivity extends AppCompatActivity {
         String contra = ((EditText) findViewById(R.id.etContraIS)).getText().toString();
         boolean verificador = false;
 
-        verificador = consultarProducto(correo, contra);
+        if (TextUtils.isEmpty(correo) || TextUtils.isEmpty(contra)) {
+            Toast.makeText(this, R.string.toastNoNull, Toast.LENGTH_SHORT).show();
+        } else {
+            verificador = consultarUsuario(correo, contra);
 
-        if (!verificador){
-            Toast.makeText(this, "No coincide", Toast.LENGTH_SHORT);
-        }else{
-            Intent intent = new Intent(this, TimeLineActivity.class);
-            session.setNomUsuario(correo);
-            startActivity(intent);
+            if (!verificador) {
+                Toast.makeText(this, R.string.toastNoCoincide, Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, TimeLineActivity.class);
+                session.setNomUsuario(correo);
+                startActivity(intent);
+            }
         }
     }
 
-    public boolean consultarProducto(String cor, String contra) {
+    public boolean consultarUsuario(String cor, String contra) {
         conn = data.getReadableDatabase();
         boolean entra = false;
 
@@ -54,7 +59,7 @@ public class IniSesionActivity extends AppCompatActivity {
             } while (fila.moveToNext());
 
         } else {
-            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return entra;

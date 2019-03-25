@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,20 +28,21 @@ public class MandarMensajeActivity extends AppCompatActivity {
 
     /* db.execSQL("create table mensaje (idMens integer primary key, imagen int, nombre text, idUsuario text, fecha text, mensaje text)"); */
 
-    public void mandarMensaje(View view){
-        String dest = ((EditText)findViewById(R.id.etDestinatarioMM)).getText().toString();
-        String mensj = ((EditText)findViewById(R.id.etMensajeMM)).getText().toString();
-        String[] nomUsuario = session.getNomUsuario().split("@");
-
-        insertarMensaje(dest, mensj, nomUsuario[0]);
-
-
+    public void mandarMensaje(View view) {
+        String dest = ((EditText) findViewById(R.id.etDestinatarioMM)).getText().toString();
+        String mensj = ((EditText) findViewById(R.id.etMensajeMM)).getText().toString();
+        if (TextUtils.isEmpty(dest) || TextUtils.isEmpty(mensj)) {
+            Toast.makeText(this, R.string.toastNoNull, Toast.LENGTH_SHORT).show();
+        } else {
+            String[] nomUsuario = session.getNomUsuario().split("@");
+            insertarMensaje(dest, mensj, nomUsuario[0]);
+        }
     }
 
     public void insertarMensaje(String dest, String mensj, String idUsuario) {
         conn = data.getWritableDatabase();
-
         ContentValues registro = new ContentValues();
+
         registro.put("imagen", R.drawable.ic_launcher_background);
         registro.put("nombre", session.getNomUsuario());
         registro.put("idUsuario", idUsuario);
@@ -50,6 +52,6 @@ public class MandarMensajeActivity extends AppCompatActivity {
         conn.insert("mensaje", null, registro);
         conn.close();
 
-        Toast.makeText(this, "Se registro su mensaje", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.toastRegistroMensaje, Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.twitteralonso;
 
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -24,23 +25,17 @@ public class NotificacionesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificaciones);
-
         session = new Session(getApplicationContext());
         data = new TwitterDB(this, "datos", null, 1);
 
         List<Notificacion> items = consultarAmigo();
 
-        /*items.add(new Notificacion(R.drawable.ic_launcher_background, "Nuevo tuit de Alonso", "Callate Bojack"));*/
-
-        // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.rvNotificaciones);
         recycler.setHasFixedSize(true);
 
-        // Usar un administrador para LinearLayout
         lManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(lManager);
 
-        // Crear un nuevo adaptador
         adapter = new NotificacionAdapter(items);
         recycler.setAdapter(adapter);
     }
@@ -49,7 +44,7 @@ public class NotificacionesActivity extends AppCompatActivity {
         conn = data.getReadableDatabase();
         List<Notificacion> listaAux = new ArrayList<>();
 
-        Cursor fila = conn.rawQuery("SELECT correoAmigo FROM amigo WHERE correoSesion = '"+session.getNomUsuario().trim()+"'", null);
+        Cursor fila = conn.rawQuery("SELECT correoAmigo FROM amigo WHERE correoSesion = '" + session.getNomUsuario().trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
 
@@ -58,7 +53,7 @@ public class NotificacionesActivity extends AppCompatActivity {
             } while (fila.moveToNext());
 
         } else {
-            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAux;
@@ -68,15 +63,15 @@ public class NotificacionesActivity extends AppCompatActivity {
         conn = data.getReadableDatabase();
         List<Notificacion> listaAmigo = new ArrayList<>();
 
-        Cursor fila = conn.rawQuery("SELECT tweet FROM tweet WHERE nombre = '"+nomBusc.trim()+"'", null);
+        Cursor fila = conn.rawQuery("SELECT tweet FROM tweet WHERE nombre = '" + nomBusc.trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
-                String nom = String.format("Nuevo tweet de: %s", nomBusc);
+                Resources res = getResources();
+                String nom = String.format(res.getString(R.string.nuevoTuitDe), nomBusc);
                 listaAmigo.add(new Notificacion(R.drawable.ic_launcher_background, nom, fila.getString(0)));
             } while (fila.moveToNext());
-
         } else {
-            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAmigo;

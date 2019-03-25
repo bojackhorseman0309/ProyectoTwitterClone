@@ -31,16 +31,12 @@ public class PerfilActivity extends AppCompatActivity {
 
         List<Tweet> items = consultarTuits(session.getAmigo());
 
-
-        // Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.rvPerfil);
         recycler.setHasFixedSize(true);
 
-        // Usar un administrador para LinearLayout
         lManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(lManager);
 
-        // Crear un nuevo adaptador
         adapter = new PerfilAdapter(items);
         recycler.setAdapter(adapter);
     }
@@ -53,25 +49,22 @@ public class PerfilActivity extends AppCompatActivity {
         conn = data.getReadableDatabase();
         List<Tweet> listaTuit = new ArrayList<>();
 
-        Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE aliasUsuario = '"+nomBusc.trim()+"'", null);
+        Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE aliasUsuario = '" + nomBusc.trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
-
                 listaTuit.add(new Tweet(fila.getInt(1), fila.getString(2),
                         fila.getString(3), fila.getString(4),
                         fila.getString(5), fila.getString(6), fila.getString(7)));
-
             } while (fila.moveToNext());
-
         } else {
-            Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaTuit;
     }
 
 
-    public void añadirAmigo(View view){
+    public void añadirAmigo(View view) {
         conn = data.getWritableDatabase();
         ContentValues registro = new ContentValues();
 
@@ -80,6 +73,6 @@ public class PerfilActivity extends AppCompatActivity {
 
         conn.insert("amigo", null, registro);
         conn.close();
-        Toast.makeText(this, "Se ingresó un amigo", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.toastAgregaSeguidor, Toast.LENGTH_SHORT).show();
     }
 }

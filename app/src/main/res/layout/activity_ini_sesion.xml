@@ -15,11 +15,11 @@
         android:text="@string/tvCorreoIS"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/etCorreoIS"
-        android:layout_width="wrap_content"
+        android:layout_width="390dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -41,7 +41,7 @@
 
     <EditText
         android:id="@+id/etContraIS"
-        android:layout_width="wrap_content"
+        android:layout_width="390dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -62,12 +62,14 @@
         app:layout_constraintTop_toBottomOf="@+id/etContraIS" />
 
     <TextView
-        android:id="@+id/tvIniciarSesionTitulo"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/tvTituloIniSesh"
+        android:text="@string/btIniciarSesion"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
