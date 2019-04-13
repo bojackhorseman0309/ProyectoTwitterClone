@@ -49,7 +49,7 @@ public class PerfilActivity extends AppCompatActivity {
         conn = data.getReadableDatabase();
         List<Tweet> listaTuit = new ArrayList<>();
 
-        Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE aliasUsuario = '" + nomBusc.trim() + "'", null);
+        Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE nombre = '" + nomBusc.trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
                 listaTuit.add(new Tweet(fila.getInt(1), fila.getString(2),
