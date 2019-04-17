@@ -20,5 +20,9 @@
         android:id="@+id/navMensajes"
         android:icon="@android:drawable/ic_dialog_email"
         android:title="@string/navMensajes" />
+    <item
+        android:id="@+id/miConfig"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="@string/miConfig" />
 
 </menu>

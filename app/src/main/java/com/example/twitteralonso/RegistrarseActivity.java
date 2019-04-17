@@ -46,6 +46,7 @@ public class RegistrarseActivity extends AppCompatActivity {
         ContentValues registro = new ContentValues();
         registro.put("correo", cor);
         registro.put("contrasenha", contra);
+        registro.put("imagen", R.drawable.ic_dashboard_black_24dp);
         conn.insert("usuario", null, registro);
         conn.close();
 

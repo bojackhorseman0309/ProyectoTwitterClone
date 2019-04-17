@@ -53,6 +53,10 @@ public class TimeLineActivity extends AppCompatActivity {
                     Intent intMensaje = new Intent(getApplicationContext(), MensajesActivity.class);
                     startActivity(intMensaje);
                     return true;
+                case R.id.miConfig:
+                    Intent intConfig = new Intent(getApplicationContext(), ConfiguracionActivity.class);
+                    startActivity(intConfig);
+                    return true;
             }
             return false;
         }
