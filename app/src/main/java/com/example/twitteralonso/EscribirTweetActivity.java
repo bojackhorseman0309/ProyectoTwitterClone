@@ -4,11 +4,15 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 public class EscribirTweetActivity extends AppCompatActivity {
 
@@ -29,12 +33,45 @@ public class EscribirTweetActivity extends AppCompatActivity {
 
     public void tuitear(View view) {
         String tuit = ((EditText) findViewById(R.id.etTweetEscTw)).getText().toString();
+        Bitmap bitmap = getImage();
         String[] nomUsuario = session.getNomUsuario().split("@");
-        insertarTuit(new Tweet(R.drawable.ic_launcher_background, session.getNomUsuario(), nomUsuario[0], tuit, "1", "1", "1"));
+        insertarTuit(new Tweet(bitmap, session.getNomUsuario(),
+                nomUsuario[0], tuit, "1", "1", "1"));
 
         Intent intent = new Intent(this, TimeLineActivity.class);
         startActivity(intent);
 
+    }
+
+    public Bitmap getImage(){
+        conn = data.getReadableDatabase();
+        Cursor cur = conn.rawQuery("SELECT imagen FROM usuario WHERE correo = '" + session.getNomUsuario().trim() + "'", null);
+
+        if (cur.moveToFirst()){
+            byte[] imgByte = cur.getBlob(0);
+            cur.close();
+            return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+        }
+        if (cur != null && !cur.isClosed()) {
+            cur.close();
+        }
+
+        return null;
+    }
+
+    public String consultaImagen (){
+        conn = data.getReadableDatabase();
+        String aux = "";
+        Cursor fila = conn.rawQuery("SELECT * FROM usuario WHERE correo = '" + session.getNomUsuario().trim() + "'", null);
+        if (fila.moveToFirst()) {
+            do {
+                aux = fila.getString(3);
+            } while (fila.moveToNext());
+        } else {
+            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+        }
+        conn.close();
+        return aux;
     }
 
     /*"create table tweet (idTweet integer primary key, imagen int," +
@@ -44,8 +81,8 @@ public class EscribirTweetActivity extends AppCompatActivity {
     public void insertarTuit(Tweet t) {
         conn = data.getWritableDatabase();
         ContentValues registro = new ContentValues();
-
-        registro.put("imagen", t.getImagenPerf());
+        byte[] imagen =  getBitmapAsByteArray(t.getImagenPerf());
+        registro.put("imagen", imagen);
         registro.put("nombre", t.getNomUsuario());
         registro.put("aliasUsuario", t.getIdNomUsuario());
         registro.put("tweet", t.getTweet());
@@ -56,5 +93,11 @@ public class EscribirTweetActivity extends AppCompatActivity {
         conn.insert("tweet", null, registro);
         conn.close();
         Toast.makeText(this, "Se ingresó un tweet", Toast.LENGTH_SHORT).show();
+    }
+
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
     }
 }

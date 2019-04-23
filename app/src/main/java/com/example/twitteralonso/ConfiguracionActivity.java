@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class ConfiguracionActivity extends AppCompatActivity {
@@ -92,31 +93,35 @@ public class ConfiguracionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, datas);
         if (requestCode == 71 && resultCode == RESULT_OK) {
             filePath = datas.getData();
-            //ImageView imag = (ImageView) findViewById(R.id.ivImagen);
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //imag.setImageBitmap(bitmap);
+            byte[] imagen = getBitmapAsByteArray(bitmap);
+            modificarImagen(imagen);
 
         }
     }
 
-    public void modificarImagen(View view) {
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
+    }
+
+    public void modificarImagen(byte[] imagen) {
+
         conn = data.getWritableDatabase();
-        String correo = ((EditText) findViewById(R.id.etCorreoConfig)).getText().toString();
-                Toast.makeText(this, R.string.toastRegActEmail, Toast.LENGTH_SHORT).show();
                 ContentValues registro = new ContentValues();
-                registro.put("correo", correo);
+                registro.put("imagen", imagen);
                 int n = conn.update("usuario", registro, "correo = + '"+session.getNomUsuario().trim()+"'" , null);
-                session.setNomUsuario(correo);
                 conn.close();
                 if (n == 1) {
-                    Toast.makeText(this, "Se modificaron los datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Se modificaron la imagen", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "No se modifico la imagen", Toast.LENGTH_SHORT).show();
                 }
         conn.close();
     }

@@ -44,6 +44,8 @@ public class IniSesionActivity extends AppCompatActivity {
         }
     }
 
+    //C:\Users\Alonso\AppData\Local\Android\Sdk\platform-tools
+
     public boolean consultarUsuario(String cor, String contra) {
         conn = data.getReadableDatabase();
         boolean entra = false;

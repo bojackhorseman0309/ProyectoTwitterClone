@@ -1,5 +1,9 @@
 package com.example.twitteralonso;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
+
+import static android.app.PendingIntent.getActivity;
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHolder> {
 
     private List<Tweet> items;
+    private Context contexto;
 
     public static class TweetViewHolder extends RecyclerView.ViewHolder {
         public ImageView imagenPerf;
@@ -26,6 +34,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         public ImageView imagenFav;
         public TextView contFav;
         public ImageView imagenShare;
+
 
 
         public TweetViewHolder(View v) {
@@ -81,8 +90,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         }
     }
 
-    public TweetAdapter(List<Tweet> items) {
+    public TweetAdapter(List<Tweet> items, Context context)
+    {
         this.items = items;
+        this.contexto = context;
     }
 
     @Override
@@ -99,7 +110,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
 
     @Override
     public void onBindViewHolder(TweetViewHolder viewHolder, int i) {
-        viewHolder.imagenPerf.setImageResource(items.get(i).getImagenPerf());
+        Bitmap bitmap = items.get(i).getImagenPerf();
+
+
+        viewHolder.imagenPerf.setImageBitmap(bitmap);
         viewHolder.nombre.setText(items.get(i).getNomUsuario());
         viewHolder.id.setText(items.get(i).getIdNomUsuario());
         viewHolder.tweet.setText(items.get(i).getTweet());
@@ -107,6 +121,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         viewHolder.contRetw.setText(items.get(i).getContRetw());
         viewHolder.contFav.setText(items.get(i).getContFav());
     }
+
 
 
 }

@@ -1,14 +1,20 @@
 package com.example.twitteralonso;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 public class RegistrarseActivity extends AppCompatActivity {
 
@@ -42,11 +48,12 @@ public class RegistrarseActivity extends AppCompatActivity {
 
     public void registrarUsuarioEnBD(String cor, String contra) {
         conn = data.getWritableDatabase();
-
+        Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.huevo);
+        byte[] imagen =  getBitmapAsByteArray(image);
         ContentValues registro = new ContentValues();
         registro.put("correo", cor);
         registro.put("contrasenha", contra);
-        registro.put("imagen", R.drawable.ic_dashboard_black_24dp);
+        registro.put("imagen", imagen);
         conn.insert("usuario", null, registro);
         conn.close();
 
@@ -55,6 +62,30 @@ public class RegistrarseActivity extends AppCompatActivity {
 
     private static boolean emailValido(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
+    }
+
+
+    public Bitmap getImage(int i){
+
+        String qu = "select img  from table where feedid=" + i ;
+        Cursor cur = conn.rawQuery(qu, null);
+
+        if (cur.moveToFirst()){
+            byte[] imgByte = cur.getBlob(0);
+            cur.close();
+            return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+        }
+        if (cur != null && !cur.isClosed()) {
+            cur.close();
+        }
+
+        return null;
     }
 
 }

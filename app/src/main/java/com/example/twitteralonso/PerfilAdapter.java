@@ -1,5 +1,9 @@
 package com.example.twitteralonso;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 
 public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilViewHolder> {
 
     private List<Tweet> items;
+    private Context contexto;
 
     public static class PerfilViewHolder extends RecyclerView.ViewHolder {
         public ImageView imagenPerf;
@@ -81,8 +87,10 @@ public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilView
         }
     }
 
-    public PerfilAdapter(List<Tweet> items) {
+    public PerfilAdapter(List<Tweet> items, Context context)
+    {
         this.items = items;
+        this.contexto = context;
     }
 
     @Override
@@ -99,7 +107,9 @@ public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilView
 
     @Override
     public void onBindViewHolder(PerfilAdapter.PerfilViewHolder viewHolder, int i) {
-        viewHolder.imagenPerf.setImageResource(items.get(i).getImagenPerf());
+        Bitmap bitmap = items.get(i).getImagenPerf();
+
+        viewHolder.imagenPerf.setImageBitmap(bitmap);
         viewHolder.nombre.setText(items.get(i).getNomUsuario());
         viewHolder.id.setText(items.get(i).getIdNomUsuario());
         viewHolder.tweet.setText(items.get(i).getTweet());

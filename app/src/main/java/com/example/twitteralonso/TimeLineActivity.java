@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -28,7 +30,9 @@ public class TimeLineActivity extends AppCompatActivity {
     private String correo;
     private TwitterDB data;
     private SQLiteDatabase conn;
+    private SQLiteDatabase conne;
     private Session session;
+    private String auxi;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -79,7 +83,7 @@ public class TimeLineActivity extends AppCompatActivity {
         lManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(lManager);
 
-        adapter = new TweetAdapter(items);
+        adapter = new TweetAdapter(items, getApplicationContext());
         recycler.setAdapter(adapter);
     }
 
@@ -90,11 +94,12 @@ public class TimeLineActivity extends AppCompatActivity {
 
     public List<Tweet> consultarTuit() {
         conn = data.getReadableDatabase();
+        Bitmap bitmap = getImage();
         List<Tweet> listaAux = new ArrayList<>();
         Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE nombre = '" + session.getNomUsuario().trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
-                listaAux.add(new Tweet(fila.getInt(1), fila.getString(2), fila.getString(3),
+                listaAux.add(new Tweet(bitmap, fila.getString(2), fila.getString(3),
                         fila.getString(4), fila.getString(5), fila.getString(6),
                         fila.getString(7)));
             } while (fila.moveToNext());
@@ -103,6 +108,22 @@ public class TimeLineActivity extends AppCompatActivity {
         }
         conn.close();
         return listaAux;
+    }
+
+    public Bitmap getImage(){
+
+        Cursor cur = conn.rawQuery("SELECT imagen FROM usuario WHERE correo = '" + session.getNomUsuario().trim() + "'", null);
+
+        if (cur.moveToFirst()){
+            byte[] imgByte = cur.getBlob(0);
+            cur.close();
+            return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+        }
+        if (cur != null && !cur.isClosed()) {
+            cur.close();
+        }
+
+        return null;
     }
 
     public List<Tweet> consultarAmigo() {
@@ -123,20 +144,36 @@ public class TimeLineActivity extends AppCompatActivity {
 
     public List<Tweet> consultarTweetAmigo(String nomBusc) {
         conn = data.getReadableDatabase();
+        Bitmap bitmap = getImageAmigo(nomBusc);
         List<Tweet> listaAmigo = new ArrayList<>();
 
         Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE nombre = '" + nomBusc.trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
-                listaAmigo.add(new Tweet(R.drawable.ic_launcher_background, fila.getString(2),
+                listaAmigo.add(new Tweet(bitmap, fila.getString(2),
                         fila.getString(3), fila.getString(4), fila.getString(5),
                         fila.getString(6), fila.getString(7)));
             } while (fila.moveToNext());
         } else {
             Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
-        conn.close();
         return listaAmigo;
+    }
+
+    public Bitmap getImageAmigo(String amigo){
+
+        Cursor cur = conn.rawQuery("SELECT imagen FROM usuario WHERE correo = '" + amigo.trim() + "'", null);
+
+        if (cur.moveToFirst()){
+            byte[] imgByte = cur.getBlob(0);
+            cur.close();
+            return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+        }
+        if (cur != null && !cur.isClosed()) {
+            cur.close();
+        }
+
+        return null;
     }
 
     public List<Tweet> mezclaLista() {

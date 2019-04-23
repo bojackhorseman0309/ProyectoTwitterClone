@@ -18,7 +18,7 @@ public class Session {
     }
 
     public String getNomUsuario() {
-        String nom = prefs.getString("nomUsuario","");
+        String nom = prefs.getString("nomUsuario", "");
         return nom;
     }
 
@@ -27,7 +27,7 @@ public class Session {
     }
 
     public String getContra() {
-        String pass = prefs.getString("contra","");
+        String pass = prefs.getString("contra", "");
         return pass;
     }
 
@@ -36,7 +36,7 @@ public class Session {
     }
 
     public String getAmigo() {
-        String nom = prefs.getString("nomAmigo","");
+        String nom = prefs.getString("nomAmigo", "");
         return nom;
     }
 
@@ -45,8 +45,9 @@ public class Session {
     }
 
     public String getAmigoImagen() {
-        String nom = prefs.getString("imagenAmigo","");
+        String nom = prefs.getString("imagenAmigo", "");
         return nom;
     }
+
 
 }

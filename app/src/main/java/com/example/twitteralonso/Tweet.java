@@ -1,8 +1,10 @@
 package com.example.twitteralonso;
 
+import android.graphics.Bitmap;
+
 public class Tweet {
 
-    private int imagenPerf;
+    private Bitmap imagenPerf;
     private String nomUsuario;
     private String idNomUsuario;
     private String tweet;
@@ -11,7 +13,7 @@ public class Tweet {
     private String contFav;
 
 
-    public Tweet(int imagenPerf, String nomUsuario, String idNomUsuario, String tweet, String contRes, String contRetw, String contFav) {
+    public Tweet(Bitmap imagenPerf, String nomUsuario, String idNomUsuario, String tweet, String contRes, String contRetw, String contFav) {
         this.imagenPerf = imagenPerf;
         this.nomUsuario = nomUsuario;
         this.idNomUsuario = idNomUsuario;
@@ -21,11 +23,11 @@ public class Tweet {
         this.contFav = contFav;
     }
 
-    public int getImagenPerf() {
+    public Bitmap getImagenPerf() {
         return imagenPerf;
     }
 
-    public void setImagenPerf(int imagenPerf) {
+    public void setImagenPerf(Bitmap imagenPerf) {
         this.imagenPerf = imagenPerf;
     }
 
