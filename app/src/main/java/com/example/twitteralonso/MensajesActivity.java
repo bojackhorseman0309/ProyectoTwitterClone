@@ -3,6 +3,8 @@ package com.example.twitteralonso;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,7 +54,8 @@ public class MensajesActivity extends AppCompatActivity {
         Cursor fila = conn.rawQuery("SELECT * FROM mensaje WHERE origen = '" + session.getNomUsuario().trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
-                itemsAux.add(new Mensaje(R.drawable.ic_launcher_background, fila.getString(2), fila.getString(3),
+                Bitmap bitmap = getImage(fila.getBlob(1));
+                itemsAux.add(new Mensaje(bitmap, fila.getString(2), fila.getString(3),
                         fila.getString(4), fila.getString(5), fila.getString(6)));
             } while (fila.moveToNext());
         } else {
@@ -60,5 +63,11 @@ public class MensajesActivity extends AppCompatActivity {
         }
         conn.close();
         return itemsAux;
+    }
+
+    public Bitmap getImage(byte[] imag){
+
+            return BitmapFactory.decodeByteArray(imag, 0, imag.length);
+
     }
 }

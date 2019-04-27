@@ -1,22 +1,24 @@
 package com.example.twitteralonso;
 
+import android.graphics.Bitmap;
+
 public class Notificacion {
 
-    private int imagenNotif;
+    private Bitmap imagenNotif;
     private String notif;
     private String desc;
 
-    public Notificacion(int imagenNotif, String notif, String desc) {
+    public Notificacion(Bitmap imagenNotif, String notif, String desc) {
         this.imagenNotif = imagenNotif;
         this.notif = notif;
         this.desc = desc;
     }
 
-    public int getImagenNotif() {
+    public Bitmap getImagenNotif() {
         return imagenNotif;
     }
 
-    public void setImagenNotif(int imagenNotif) {
+    public void setImagenNotif(Bitmap imagenNotif) {
         this.imagenNotif = imagenNotif;
     }
 

@@ -1,5 +1,6 @@
 package com.example.twitteralonso;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,7 +48,8 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
 
     @Override
     public void onBindViewHolder(NotificacionAdapter.NotifViewHolder viewHolder, int i) {
-        viewHolder.imagenNotif.setImageResource(items.get(i).getImagenNotif());
+        Bitmap bitmap = items.get(i).getImagenNotif();
+        viewHolder.imagenNotif.setImageBitmap(bitmap);
         viewHolder.notificacion.setText(items.get(i).getNotif());
         viewHolder.descripcion.setText(items.get(i).getDesc());
     }

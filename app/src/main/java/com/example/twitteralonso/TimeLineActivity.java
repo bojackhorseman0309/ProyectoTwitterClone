@@ -136,7 +136,7 @@ public class TimeLineActivity extends AppCompatActivity {
                 listaAux.addAll(consultarTweetAmigo(fila.getString(0)));
             } while (fila.moveToNext());
         } else {
-            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAux;
@@ -155,7 +155,7 @@ public class TimeLineActivity extends AppCompatActivity {
                         fila.getString(6), fila.getString(7)));
             } while (fila.moveToNext());
         } else {
-            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         return listaAmigo;
     }

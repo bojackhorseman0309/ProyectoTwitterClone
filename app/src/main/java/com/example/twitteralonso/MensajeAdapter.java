@@ -1,5 +1,6 @@
 package com.example.twitteralonso;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -60,7 +61,8 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.MensajeV
 
     @Override
     public void onBindViewHolder(MensajeAdapter.MensajeViewHolder viewHolder, int i) {
-        viewHolder.imagenMens.setImageResource(items.get(i).getImagenPerf());
+        Bitmap bitmap = items.get(i).getImagenPerf();
+        viewHolder.imagenMens.setImageBitmap(bitmap);
         viewHolder.nomUsuario.setText(items.get(i).getNomUsuario());
         viewHolder.idUsuario.setText(items.get(i).getIdUsuario());
         viewHolder.fecha.setText(items.get(i).getFecha());

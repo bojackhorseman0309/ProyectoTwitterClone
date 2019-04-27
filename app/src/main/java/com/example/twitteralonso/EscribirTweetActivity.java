@@ -59,20 +59,7 @@ public class EscribirTweetActivity extends AppCompatActivity {
         return null;
     }
 
-    public String consultaImagen (){
-        conn = data.getReadableDatabase();
-        String aux = "";
-        Cursor fila = conn.rawQuery("SELECT * FROM usuario WHERE correo = '" + session.getNomUsuario().trim() + "'", null);
-        if (fila.moveToFirst()) {
-            do {
-                aux = fila.getString(3);
-            } while (fila.moveToNext());
-        } else {
-            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
-        }
-        conn.close();
-        return aux;
-    }
+
 
     /*"create table tweet (idTweet integer primary key, imagen int," +
             "nombre text, aliasUsuario text, " +

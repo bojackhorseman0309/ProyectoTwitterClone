@@ -1,15 +1,17 @@
 package com.example.twitteralonso;
 
+import android.graphics.Bitmap;
+
 public class Mensaje {
 
-    private int imagenPerf;
+    private Bitmap imagenPerf;
     private String nomUsuario;
     private String idUsuario;
     private String fecha;
     private String mensaje;
     private String origen;
 
-    public Mensaje(int imagenPerf, String nomUsuario, String idUsuario, String fecha, String mensaje, String origen) {
+    public Mensaje(Bitmap imagenPerf, String nomUsuario, String idUsuario, String fecha, String mensaje, String origen) {
         this.imagenPerf = imagenPerf;
         this.nomUsuario = nomUsuario;
         this.idUsuario = idUsuario;
@@ -26,13 +28,13 @@ public class Mensaje {
         this.origen = origen;
     }
 
-    public int getImagenPerf() {
+    public Bitmap getImagenPerf() {
         return imagenPerf;
     }
 
 
 
-    public void setImagenPerf(int imagenPerf) {
+    public void setImagenPerf(Bitmap imagenPerf) {
         this.imagenPerf = imagenPerf;
     }
 

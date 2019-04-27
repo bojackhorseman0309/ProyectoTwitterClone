@@ -3,6 +3,8 @@ package com.example.twitteralonso;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,6 +63,7 @@ public class NotificacionesActivity extends AppCompatActivity {
 
     public List<Notificacion> consultarTweetAmigo(String nomBusc) {
         conn = data.getReadableDatabase();
+        Bitmap bitmap = getImage(nomBusc);
         List<Notificacion> listaAmigo = new ArrayList<>();
 
         Cursor fila = conn.rawQuery("SELECT tweet FROM tweet WHERE nombre = '" + nomBusc.trim() + "'", null);
@@ -68,13 +71,29 @@ public class NotificacionesActivity extends AppCompatActivity {
             do {
                 Resources res = getResources();
                 String nom = String.format(res.getString(R.string.nuevoTuitDe), nomBusc);
-                listaAmigo.add(new Notificacion(R.drawable.ic_launcher_background, nom, fila.getString(0)));
+                listaAmigo.add(new Notificacion(bitmap, nom, fila.getString(0)));
             } while (fila.moveToNext());
         } else {
             Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAmigo;
+    }
+
+    public Bitmap getImage(String amigo){
+
+        Cursor cur = conn.rawQuery("SELECT imagen FROM usuario WHERE correo = '" + amigo.trim() + "'", null);
+
+        if (cur.moveToFirst()){
+            byte[] imgByte = cur.getBlob(0);
+            cur.close();
+            return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+        }
+        if (cur != null && !cur.isClosed()) {
+            cur.close();
+        }
+
+        return null;
     }
 
 }

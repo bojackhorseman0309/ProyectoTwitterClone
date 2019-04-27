@@ -3,12 +3,16 @@ package com.example.twitteralonso;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 public class MandarMensajeActivity extends AppCompatActivity {
 
@@ -42,8 +46,9 @@ public class MandarMensajeActivity extends AppCompatActivity {
     public void insertarMensaje(String dest, String mensj, String idUsuario) {
         conn = data.getWritableDatabase();
         ContentValues registro = new ContentValues();
-
-        registro.put("imagen", R.drawable.ic_launcher_background);
+        Bitmap bitmap = getImage();
+        byte[] imagen = getBitmapAsByteArray(bitmap);
+        registro.put("imagen", imagen);
         registro.put("nombre", session.getNomUsuario());
         registro.put("idUsuario", idUsuario);
         registro.put("fecha", "hoy");
@@ -53,5 +58,27 @@ public class MandarMensajeActivity extends AppCompatActivity {
         conn.close();
 
         Toast.makeText(this, R.string.toastRegistroMensaje, Toast.LENGTH_SHORT).show();
+    }
+
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
+    }
+
+    public Bitmap getImage(){
+
+        Cursor cur = conn.rawQuery("SELECT imagen FROM usuario WHERE correo = '" + session.getNomUsuario().trim() + "'", null);
+
+        if (cur.moveToFirst()){
+            byte[] imgByte = cur.getBlob(0);
+            cur.close();
+            return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+        }
+        if (cur != null && !cur.isClosed()) {
+            cur.close();
+        }
+
+        return null;
     }
 }

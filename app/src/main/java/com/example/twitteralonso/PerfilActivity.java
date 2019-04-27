@@ -66,24 +66,10 @@ public class PerfilActivity extends AppCompatActivity {
         return listaTuit;
     }
 
-    public String consultaImagenAmigo (String amigo){
-        conn = data.getReadableDatabase();
-        String aux = "";
-        Cursor fila = conn.rawQuery("SELECT * FROM usuario WHERE correo = '" + amigo.trim() + "'", null);
-        if (fila.moveToFirst()) {
-            do {
-                aux = fila.getString(3);
-            } while (fila.moveToNext());
-        } else {
-            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
-        }
-        conn.close();
-        return aux;
-    }
 
     public Bitmap getImage(String amigo){
 
-        Cursor cur = conn.rawQuery("SELECT * FROM usuario WHERE correo = '" + amigo.trim() + "'", null);
+        Cursor cur = conn.rawQuery("SELECT imagen FROM usuario WHERE correo = '" + amigo.trim() + "'", null);
 
         if (cur.moveToFirst()){
             byte[] imgByte = cur.getBlob(0);

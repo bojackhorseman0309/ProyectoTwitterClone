@@ -108,7 +108,6 @@ public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilView
     @Override
     public void onBindViewHolder(PerfilAdapter.PerfilViewHolder viewHolder, int i) {
         Bitmap bitmap = items.get(i).getImagenPerf();
-
         viewHolder.imagenPerf.setImageBitmap(bitmap);
         viewHolder.nombre.setText(items.get(i).getNomUsuario());
         viewHolder.id.setText(items.get(i).getIdNomUsuario());
