@@ -1,6 +1,7 @@
 package com.example.twitteralonso;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -30,6 +32,9 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         session = new Session(getApplicationContext());
         data = new TwitterDB(this, "datos", null, 1);
+        TextView tvNom = (TextView)findViewById(R.id.tvNombrePerfil);
+        Intent intent = getIntent();
+        tvNom.setText(intent.getStringExtra("nombre"));
 
         List<Tweet> items = consultarTuits(session.getAmigo());
 

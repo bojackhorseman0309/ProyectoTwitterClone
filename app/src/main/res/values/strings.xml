@@ -37,5 +37,6 @@
     <string name="tvCambPwd">Cambiar Contraseña: </string>
     <string name="btCambCorreo">Guardar Correo</string>
     <string name="btCambPwd">Guardar Contraseña</string>
-    <string name="btCambImagen">Guardar Imagen de Perfil</string>
+    <string name="btCambImagen">Cambiar Imagen de Perfil</string>
+    <string name="toastUsuarioExiste">Ya existe un usuario con este correo</string>
 </resources>

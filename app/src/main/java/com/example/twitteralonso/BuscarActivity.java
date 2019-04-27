@@ -28,11 +28,34 @@ public class BuscarActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(nombreBuscado)){
             Toast.makeText(this, R.string.toastNoNull, Toast.LENGTH_SHORT).show();
         } else{
-            session.setAmigo(nombreBuscado);
-            Intent intent = new Intent(this, PerfilActivity.class);
-            startActivity(intent);
+            if(!consultarUsuarioExiste(nombreBuscado)){
+                Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+            } else{
+                session.setAmigo(nombreBuscado);
+                Intent intent = new Intent(this, PerfilActivity.class);
+                intent.putExtra("nombre", nombreBuscado);
+                startActivity(intent);
+            }
+
         }
 
+    }
+
+    public boolean consultarUsuarioExiste(String cor) {
+        conn = data.getReadableDatabase();
+        boolean entra = false;
+
+        Cursor fila = conn.rawQuery("SELECT * FROM usuario WHERE correo = '" + cor.trim() + "'", null);
+        if (fila.moveToFirst()) {
+            do {
+                entra = true;
+            } while (fila.moveToNext());
+
+        } else {
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+        }
+        conn.close();
+        return entra;
     }
 
 

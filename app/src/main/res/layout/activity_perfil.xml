@@ -8,12 +8,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="401dp"
+        android:layout_height="674dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNombrePerfil" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatAñadir"
@@ -21,9 +20,20 @@
         android:layout_height="56dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#3F51B5"
         android:clickable="true"
         android:onClick="añadirAmigo"
+        android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@tools:sample/avatars[2]" />
+
+    <TextView
+        android:id="@+id/tvNombrePerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

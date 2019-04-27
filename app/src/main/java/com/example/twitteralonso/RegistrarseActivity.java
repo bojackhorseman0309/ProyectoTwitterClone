@@ -33,15 +33,20 @@ public class RegistrarseActivity extends AppCompatActivity {
         String correo = ((EditText) findViewById(R.id.etCorreoR)).getText().toString();
         String contra = ((EditText) findViewById(R.id.etContraR)).getText().toString();
 
-        if (correo.isEmpty() || correo == null || contra.isEmpty() || contra == null){
+        if (correo.isEmpty() || correo == null || contra.isEmpty() || contra == null) {
             Toast.makeText(this, R.string.toastNoNull, Toast.LENGTH_SHORT).show();
-        }else{
-            if (!emailValido(correo)){
+        } else {
+            if (!emailValido(correo)) {
                 Toast.makeText(this, R.string.toastRegActEmail, Toast.LENGTH_SHORT).show();
-            }else{
-                registrarUsuarioEnBD(correo, contra);
-                Intent intent = new Intent(this, IniSesionActivity.class);
-                startActivity(intent);
+            } else {
+                if (consultarUsuarioRepetido(correo)) {
+                    Toast.makeText(this, R.string.toastUsuarioExiste, Toast.LENGTH_SHORT).show();
+                } else {
+                    registrarUsuarioEnBD(correo, contra);
+                    Intent intent = new Intent(this, IniSesionActivity.class);
+                    startActivity(intent);
+                }
+
             }
         }
     }
@@ -49,7 +54,7 @@ public class RegistrarseActivity extends AppCompatActivity {
     public void registrarUsuarioEnBD(String cor, String contra) {
         conn = data.getWritableDatabase();
         Bitmap image = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.huevo);
-        byte[] imagen =  getBitmapAsByteArray(image);
+        byte[] imagen = getBitmapAsByteArray(image);
         ContentValues registro = new ContentValues();
         registro.put("correo", cor);
         registro.put("contrasenha", contra);
@@ -71,12 +76,12 @@ public class RegistrarseActivity extends AppCompatActivity {
     }
 
 
-    public Bitmap getImage(int i){
+    public Bitmap getImage(int i) {
 
-        String qu = "select img  from table where feedid=" + i ;
+        String qu = "select img  from table where feedid=" + i;
         Cursor cur = conn.rawQuery(qu, null);
 
-        if (cur.moveToFirst()){
+        if (cur.moveToFirst()) {
             byte[] imgByte = cur.getBlob(0);
             cur.close();
             return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
@@ -86,6 +91,23 @@ public class RegistrarseActivity extends AppCompatActivity {
         }
 
         return null;
+    }
+
+    public boolean consultarUsuarioRepetido(String cor) {
+        conn = data.getReadableDatabase();
+        boolean entra = false;
+
+        Cursor fila = conn.rawQuery("SELECT * FROM usuario WHERE correo = '" + cor.trim() + "'", null);
+        if (fila.moveToFirst()) {
+            do {
+                entra = true;
+            } while (fila.moveToNext());
+
+        } else {
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+        }
+        conn.close();
+        return entra;
     }
 
 }
