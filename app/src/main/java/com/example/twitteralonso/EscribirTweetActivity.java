@@ -36,7 +36,7 @@ public class EscribirTweetActivity extends AppCompatActivity {
         Bitmap bitmap = getImage();
         String[] nomUsuario = session.getNomUsuario().split("@");
         insertarTuit(new Tweet(bitmap, session.getNomUsuario(),
-                nomUsuario[0], tuit, "1", "1", "1"));
+                nomUsuario[0], tuit, 0));
 
         Intent intent = new Intent(this, TimeLineActivity.class);
         startActivity(intent);
@@ -73,8 +73,6 @@ public class EscribirTweetActivity extends AppCompatActivity {
         registro.put("nombre", t.getNomUsuario());
         registro.put("aliasUsuario", t.getIdNomUsuario());
         registro.put("tweet", t.getTweet());
-        registro.put("conResp", t.getContRes());
-        registro.put("contRetw", t.getContRetw());
         registro.put("contFav", t.getContFav());
 
         conn.insert("tweet", null, registro);

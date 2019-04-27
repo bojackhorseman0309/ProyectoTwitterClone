@@ -61,8 +61,7 @@ public class PerfilActivity extends AppCompatActivity {
         if (fila.moveToFirst()) {
             do {
                 listaTuit.add(new Tweet(bitmap, fila.getString(2),
-                        fila.getString(3), fila.getString(4),
-                        fila.getString(5), fila.getString(6), fila.getString(7)));
+                        fila.getString(3), fila.getString(4), fila.getInt(7)));
             } while (fila.moveToNext());
         } else {
             Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
@@ -91,14 +90,39 @@ public class PerfilActivity extends AppCompatActivity {
 
 
     public void añadirAmigo(View view) {
-        conn = data.getWritableDatabase();
-        ContentValues registro = new ContentValues();
+        if (consultarAmigo()){
+            Toast.makeText(this, R.string.toastYaLoSeguis, Toast.LENGTH_SHORT).show();
+        } else{
+            conn = data.getWritableDatabase();
+            ContentValues registro = new ContentValues();
+            registro.put("correoSesion", session.getNomUsuario());
+            registro.put("correoAmigo", session.getAmigo());
 
-        registro.put("correoSesion", session.getNomUsuario());
-        registro.put("correoAmigo", session.getAmigo());
+            conn.insert("amigo", null, registro);
+            conn.close();
+            Toast.makeText(this, R.string.toastAgregaSeguidor, Toast.LENGTH_SHORT).show();
+        }
 
-        conn.insert("amigo", null, registro);
+    }
+
+    public boolean consultarAmigo() {
+        conn = data.getReadableDatabase();
+        boolean validador = false;
+
+        Cursor fila = conn.rawQuery("SELECT correoAmigo FROM amigo WHERE correoSesion = '" + session.getNomUsuario().trim() + "'", null);
+        if (fila.moveToFirst()) {
+            do {
+                if (fila.getString(0).equalsIgnoreCase(session.getAmigo())){
+                    validador = true;
+                    break;
+                } else{
+                    validador = false;
+                }
+            } while (fila.moveToNext());
+        } else {
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+        }
         conn.close();
-        Toast.makeText(this, R.string.toastAgregaSeguidor, Toast.LENGTH_SHORT).show();
+        return validador;
     }
 }

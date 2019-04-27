@@ -55,7 +55,7 @@ public class NotificacionesActivity extends AppCompatActivity {
             } while (fila.moveToNext());
 
         } else {
-            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAux;
@@ -74,7 +74,7 @@ public class NotificacionesActivity extends AppCompatActivity {
                 listaAmigo.add(new Notificacion(bitmap, nom, fila.getString(0)));
             } while (fila.moveToNext());
         } else {
-            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAmigo;

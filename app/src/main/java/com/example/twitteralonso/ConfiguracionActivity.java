@@ -48,9 +48,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 session.setNomUsuario(correo);
                 conn.close();
                 if (n == 1) {
-                    Toast.makeText(this, "Se modificaron los datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -74,9 +74,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 int n = conn.update("usuario", registro, "correo = + '"+session.getNomUsuario().trim()+"'", null);
                 conn.close();
                 if (n == 1) {
-                    Toast.makeText(this, "Se modificaron los datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "No se encontraron registros", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
                 }
         }
         conn.close();
@@ -119,10 +119,18 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 int n = conn.update("usuario", registro, "correo = + '"+session.getNomUsuario().trim()+"'" , null);
                 conn.close();
                 if (n == 1) {
-                    Toast.makeText(this, "Se modificaron la imagen", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "No se modifico la imagen", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
                 }
         conn.close();
+    }
+
+    public void cerrarSesion(View view){
+        Intent intent = new Intent(this, TimeLineActivity.class);
+        session.setAmigo(null);
+        session.setContra(null);
+        session.setNomUsuario(null);
+        startActivity(intent);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.twitteralonso;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -100,21 +101,20 @@ public class TimeLineActivity extends AppCompatActivity {
         if (fila.moveToFirst()) {
             do {
                 listaAux.add(new Tweet(bitmap, fila.getString(2), fila.getString(3),
-                        fila.getString(4), fila.getString(5), fila.getString(6),
-                        fila.getString(7)));
+                        fila.getString(4), fila.getInt(7)));
             } while (fila.moveToNext());
         } else {
-            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return listaAux;
     }
 
-    public Bitmap getImage(){
+    public Bitmap getImage() {
 
         Cursor cur = conn.rawQuery("SELECT imagen FROM usuario WHERE correo = '" + session.getNomUsuario().trim() + "'", null);
 
-        if (cur.moveToFirst()){
+        if (cur.moveToFirst()) {
             byte[] imgByte = cur.getBlob(0);
             cur.close();
             return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
@@ -151,8 +151,7 @@ public class TimeLineActivity extends AppCompatActivity {
         if (fila.moveToFirst()) {
             do {
                 listaAmigo.add(new Tweet(bitmap, fila.getString(2),
-                        fila.getString(3), fila.getString(4), fila.getString(5),
-                        fila.getString(6), fila.getString(7)));
+                        fila.getString(3), fila.getString(4), fila.getInt(7)));
             } while (fila.moveToNext());
         } else {
             //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
@@ -160,11 +159,11 @@ public class TimeLineActivity extends AppCompatActivity {
         return listaAmigo;
     }
 
-    public Bitmap getImageAmigo(String amigo){
+    public Bitmap getImageAmigo(String amigo) {
 
         Cursor cur = conn.rawQuery("SELECT imagen FROM usuario WHERE correo = '" + amigo.trim() + "'", null);
 
-        if (cur.moveToFirst()){
+        if (cur.moveToFirst()) {
             byte[] imgByte = cur.getBlob(0);
             cur.close();
             return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
@@ -182,6 +181,8 @@ public class TimeLineActivity extends AppCompatActivity {
         listaFinal.addAll(consultarTuit());
         return listaFinal;
     }
+
+
 
 
 }

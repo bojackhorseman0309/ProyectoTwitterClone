@@ -59,7 +59,7 @@ public class MensajesActivity extends AppCompatActivity {
                         fila.getString(4), fila.getString(5), fila.getString(6)));
             } while (fila.moveToNext());
         } else {
-            Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
         }
         conn.close();
         return itemsAux;

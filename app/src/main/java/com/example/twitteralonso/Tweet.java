@@ -8,18 +8,14 @@ public class Tweet {
     private String nomUsuario;
     private String idNomUsuario;
     private String tweet;
-    private String contRes;
-    private String contRetw;
-    private String contFav;
+    private int contFav;
 
 
-    public Tweet(Bitmap imagenPerf, String nomUsuario, String idNomUsuario, String tweet, String contRes, String contRetw, String contFav) {
+    public Tweet(Bitmap imagenPerf, String nomUsuario, String idNomUsuario, String tweet, int contFav) {
         this.imagenPerf = imagenPerf;
         this.nomUsuario = nomUsuario;
         this.idNomUsuario = idNomUsuario;
         this.tweet = tweet;
-        this.contRes = contRes;
-        this.contRetw = contRetw;
         this.contFav = contFav;
     }
 
@@ -55,27 +51,12 @@ public class Tweet {
         this.tweet = tweet;
     }
 
-    public String getContRes() {
-        return contRes;
-    }
 
-    public void setContRes(String contRes) {
-        this.contRes = contRes;
-    }
-
-    public String getContRetw() {
-        return contRetw;
-    }
-
-    public void setContRetw(String contRetw) {
-        this.contRetw = contRetw;
-    }
-
-    public String getContFav() {
+    public int getContFav() {
         return contFav;
     }
 
-    public void setContFav(String contFav) {
+    public void setContFav(int contFav) {
         this.contFav = contFav;
     }
 

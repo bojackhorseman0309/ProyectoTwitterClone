@@ -15,7 +15,7 @@ public class TwitterDB extends SQLiteOpenHelper {
 
         db.execSQL("create table tweet (idTweet integer primary key, imagen blob," +
                                         "nombre text, aliasUsuario text, " +
-                                        "tweet text, conResp text, contRetw text, contFav text)");
+                                        "tweet text, conResp text, contRetw text, contFav int)");
 
         db.execSQL("create table notificacion (idNotif integer primary key, imagen blob, notificacion text, descripcion text)");
         db.execSQL("create table mensaje (idMens integer primary key, imagen blob, nombre text, idUsuario text, fecha text, mensaje text, origen text)");
@@ -30,7 +30,7 @@ public class TwitterDB extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("create table tweet (idTweet integer primary key, imagen blob," +
                 "nombre text, aliasUsuario text, " +
-                "tweet text, conResp text, contRetw text, contFav text)");
+                "tweet text, conResp text, contRetw text, contFav int)");
 
         db.execSQL("create table notificacion (idNotif integer primary key, imagen blob, notificacion text, descripcion text)");
         db.execSQL("create table mensaje (idMens integer primary key, imagen blob, nombre text, idUsuario text, fecha text, mensaje text, origen text)");

@@ -38,9 +38,31 @@ public class MandarMensajeActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(dest) || TextUtils.isEmpty(mensj)) {
             Toast.makeText(this, R.string.toastNoNull, Toast.LENGTH_SHORT).show();
         } else {
-            String[] nomUsuario = session.getNomUsuario().split("@");
-            insertarMensaje(dest, mensj, nomUsuario[0]);
+            if (!consultarUsuarioExiste(dest)){
+                Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+            } else{
+                String[] nomUsuario = session.getNomUsuario().split("@");
+                insertarMensaje(dest, mensj, nomUsuario[0]);
+            }
+
         }
+    }
+
+    public boolean consultarUsuarioExiste(String cor) {
+        conn = data.getReadableDatabase();
+        boolean entra = false;
+
+        Cursor fila = conn.rawQuery("SELECT * FROM usuario WHERE correo = '" + cor.trim() + "'", null);
+        if (fila.moveToFirst()) {
+            do {
+                entra = true;
+            } while (fila.moveToNext());
+
+        } else {
+            //Toast.makeText(this, R.string.toastNoHayRegistros, Toast.LENGTH_SHORT).show();
+        }
+        conn.close();
+        return entra;
     }
 
     public void insertarMensaje(String dest, String mensj, String idUsuario) {

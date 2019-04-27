@@ -1,6 +1,7 @@
 package com.example.twitteralonso;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -18,17 +19,13 @@ import java.util.List;
 public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilViewHolder> {
 
     private List<Tweet> items;
-    private Context contexto;
+    private static Context contexto;
 
     public static class PerfilViewHolder extends RecyclerView.ViewHolder {
         public ImageView imagenPerf;
         public TextView nombre;
         public TextView id;
         public TextView tweet;
-        public ImageView imagenRes;
-        public TextView contRes;
-        public ImageView imagenRetw;
-        public TextView contRetw;
         public ImageView imagenFav;
         public TextView contFav;
         public ImageView imagenShare;
@@ -40,46 +37,21 @@ public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilView
             nombre = (TextView) v.findViewById(R.id.tvNomCardPerfAct);
             id = (TextView) v.findViewById(R.id.tvIdPerfCardPerfAct);
             tweet = (TextView) v.findViewById(R.id.tvTuitContCardPerfAct);
-            imagenRes = (ImageView) v.findViewById(R.id.ivRespondCardPerfAct);
-            contRes = (TextView) v.findViewById(R.id.tvResContCardPerfAct);
-            imagenRetw = (ImageView) v.findViewById(R.id.ivRetuitCardPerfAct);
-            contRetw = (TextView) v.findViewById(R.id.tvRetwContCardPerfAct);
-            imagenFav = (ImageView) v.findViewById(R.id.ivFavCardPerfAct);
-            contFav = (TextView) v.findViewById(R.id.tvFavContCardPerfAct);
             imagenShare = (ImageView) v.findViewById(R.id.ivShareCardPerfAct);
 
-            ((ImageView) v.findViewById(R.id.ivPerfilPerfAct)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            ((ImageView) v.findViewById(R.id.ivRespondCardPerfAct)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            ((ImageView) v.findViewById(R.id.ivRetuitCardPerfAct)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            ((ImageView) v.findViewById(R.id.ivFavCardPerfAct)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
-                }
-            });
 
             ((ImageView) v.findViewById(R.id.ivShareCardPerfAct)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
+                    Intent sharingIntent = new Intent( android.content.Intent.ACTION_SEND);
+                    sharingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    sharingIntent.setType("text/plain");
+                    String shareBody = tweet.getText().toString();
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                    Intent chooserIntent = Intent.createChooser(sharingIntent, "Open With");
+                    chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    contexto.startActivity(chooserIntent);
                 }
             });
 
@@ -112,9 +84,6 @@ public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilView
         viewHolder.nombre.setText(items.get(i).getNomUsuario());
         viewHolder.id.setText(items.get(i).getIdNomUsuario());
         viewHolder.tweet.setText(items.get(i).getTweet());
-        viewHolder.contRes.setText(items.get(i).getContRes());
-        viewHolder.contRetw.setText(items.get(i).getContRetw());
-        viewHolder.contFav.setText(items.get(i).getContFav());
 
     }
 

@@ -10,18 +10,11 @@
     <string name="title_dashboard">Buscar</string>
     <string name="title_notifications">Notificaciones</string>
     <string name="navMensajes">Mensajes</string>
-    <string name="tvBuscar">Buscar</string>
+    <string name="tvBuscar">Buscar Amigo</string>
     <string name="btBuscar">Buscar Usuario</string>
     <string name="tvTituloIniSesh">Iniciar Sesion</string>
     <string name="tvTweet">Escribir Tweet</string>
     <string name="btTwittear">Twittear</string>
-    <string name="title_activity_prueba_borrar">pruebaBorrar</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
     <string name="toastRegAct">Se registro satisfactoriamente</string>
     <string name="toastNoNull">No se permiten valores vacios</string>
     <string name="toastRegActEmail">Formato de correo invalido</string>
@@ -39,4 +32,7 @@
     <string name="btCambPwd">Guardar Contraseña</string>
     <string name="btCambImagen">Cambiar Imagen de Perfil</string>
     <string name="toastUsuarioExiste">Ya existe un usuario con este correo</string>
+    <string name="toastNoSePudo">No se pudo realizar la operación</string>
+    <string name="btCerrarSesion">Cerrar Sesión</string>
+    <string name="toastYaLoSeguis">Ya estas siguiendo a esta persona</string>
 </resources>

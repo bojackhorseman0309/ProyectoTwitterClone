@@ -1,6 +1,8 @@
 package com.example.twitteralonso;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -11,23 +13,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.sql.Time;
 import java.util.List;
 
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHolder> {
 
     private List<Tweet> items;
-    private Context contexto;
+    private static Context contexto;
 
     public static class TweetViewHolder extends RecyclerView.ViewHolder {
         public ImageView imagenPerf;
         public TextView nombre;
         public TextView id;
         public TextView tweet;
-        public ImageView imagenRes;
-        public TextView contRes;
-        public ImageView imagenRetw;
-        public TextView contRetw;
         public ImageView imagenFav;
         public TextView contFav;
         public ImageView imagenShare;
@@ -40,49 +40,22 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
             nombre = (TextView) v.findViewById(R.id.tvNomCardPerfAct);
             id = (TextView) v.findViewById(R.id.tvIdPerfCardPerfAct);
             tweet = (TextView) v.findViewById(R.id.tvTuitContCardPerfAct);
-            imagenRes = (ImageView) v.findViewById(R.id.ivRespondCardPerfAct);
-            contRes = (TextView) v.findViewById(R.id.tvResContCard);
-            imagenRetw = (ImageView) v.findViewById(R.id.ivRetuitCardPerfAct);
-            contRetw = (TextView) v.findViewById(R.id.tvRetwContCard);
-            imagenFav = (ImageView) v.findViewById(R.id.ivFavCardPerfAct);
-            contFav = (TextView) v.findViewById(R.id.tvFavContCard);
             imagenShare = (ImageView) v.findViewById(R.id.ivShareCardPerfAct);
-
-            ((ImageView) v.findViewById(R.id.ivPerfilPerfAct)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            ((ImageView) v.findViewById(R.id.ivRespondCardPerfAct)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            ((ImageView) v.findViewById(R.id.ivRetuitCardPerfAct)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            ((ImageView) v.findViewById(R.id.ivFavCardPerfAct)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
-                }
-            });
 
             ((ImageView) v.findViewById(R.id.ivShareCardPerfAct)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Aca esta", Toast.LENGTH_SHORT).show();
+                    Intent sharingIntent = new Intent( android.content.Intent.ACTION_SEND);
+                    sharingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    sharingIntent.setType("text/plain");
+                    String shareBody = tweet.getText().toString();
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                    Intent chooserIntent = Intent.createChooser(sharingIntent, "Open With");
+                    chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    contexto.startActivity(chooserIntent);
                 }
             });
-
 
         }
     }
@@ -112,9 +85,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.TweetViewHol
         viewHolder.nombre.setText(items.get(i).getNomUsuario());
         viewHolder.id.setText(items.get(i).getIdNomUsuario());
         viewHolder.tweet.setText(items.get(i).getTweet());
-        viewHolder.contRes.setText(items.get(i).getContRes());
-        viewHolder.contRetw.setText(items.get(i).getContRetw());
-        viewHolder.contFav.setText(items.get(i).getContFav());
     }
 
 
