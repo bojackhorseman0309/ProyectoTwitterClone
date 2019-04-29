@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         session = new Session(getApplicationContext());
         data = new TwitterDB(this, "datos", null, 1);
-        TextView tvNom = (TextView)findViewById(R.id.tvNombrePerfil);
+        TextView tvNom = (TextView) findViewById(R.id.tvNombrePerfil);
         Intent intent = getIntent();
         tvNom.setText(intent.getStringExtra("nombre"));
 
@@ -54,7 +55,7 @@ public class PerfilActivity extends AppCompatActivity {
 
     public List<Tweet> consultarTuits(String nomBusc) {
         conn = data.getReadableDatabase();
-       Bitmap bitmap = getImage(nomBusc);
+        Bitmap bitmap = getImage(nomBusc);
         List<Tweet> listaTuit = new ArrayList<>();
 
         Cursor fila = conn.rawQuery("SELECT * FROM tweet WHERE nombre = '" + nomBusc.trim() + "'", null);
@@ -71,11 +72,11 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
 
-    public Bitmap getImage(String amigo){
+    public Bitmap getImage(String amigo) {
 
         Cursor cur = conn.rawQuery("SELECT imagen FROM usuario WHERE correo = '" + amigo.trim() + "'", null);
 
-        if (cur.moveToFirst()){
+        if (cur.moveToFirst()) {
             byte[] imgByte = cur.getBlob(0);
             cur.close();
             return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
@@ -88,11 +89,10 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
 
-
     public void añadirAmigo(View view) {
-        if (consultarAmigo()){
+        if (consultarAmigo()) {
             Toast.makeText(this, R.string.toastYaLoSeguis, Toast.LENGTH_SHORT).show();
-        } else{
+        } else {
             conn = data.getWritableDatabase();
             ContentValues registro = new ContentValues();
             registro.put("correoSesion", session.getNomUsuario());
@@ -112,10 +112,10 @@ public class PerfilActivity extends AppCompatActivity {
         Cursor fila = conn.rawQuery("SELECT correoAmigo FROM amigo WHERE correoSesion = '" + session.getNomUsuario().trim() + "'", null);
         if (fila.moveToFirst()) {
             do {
-                if (fila.getString(0).equalsIgnoreCase(session.getAmigo())){
+                if (fila.getString(0).equalsIgnoreCase(session.getAmigo())) {
                     validador = true;
                     break;
-                } else{
+                } else {
                     validador = false;
                 }
             } while (fila.moveToNext());
@@ -124,5 +124,25 @@ public class PerfilActivity extends AppCompatActivity {
         }
         conn.close();
         return validador;
+    }
+
+    //"correo = + '"+session.getNomUsuario().trim()+"'"
+
+    public void eliminarAmigo(View view) {
+        if (!consultarAmigo()) {
+            Toast.makeText(this, R.string.toastEliminaNoAmigo, Toast.LENGTH_SHORT).show();
+        } else {
+            conn = data.getWritableDatabase();
+            int n = conn.delete("amigo", " correoSesion = + '" + session.getNomUsuario().trim() + "' "
+                    + " AND correoAmigo =+ '" + session.getAmigo().trim() + "'", null);
+            conn.close();
+            if (n == 1) {
+                Toast.makeText(this, R.string.toastEliminaAmigo, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
+            }
+            conn.close();
+        }
+     
     }
 }

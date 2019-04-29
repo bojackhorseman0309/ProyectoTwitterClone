@@ -35,12 +35,14 @@ public class EscribirTweetActivity extends AppCompatActivity {
         String tuit = ((EditText) findViewById(R.id.etTweetEscTw)).getText().toString();
         Bitmap bitmap = getImage();
         String[] nomUsuario = session.getNomUsuario().split("@");
-        insertarTuit(new Tweet(bitmap, session.getNomUsuario(),
-                nomUsuario[0], tuit, 0));
-
-        Intent intent = new Intent(this, TimeLineActivity.class);
-        startActivity(intent);
-
+        if (tuit.isEmpty() || tuit == null){
+            Toast.makeText(this, R.string.toastNoNull, Toast.LENGTH_SHORT).show();
+        }else{
+            insertarTuit(new Tweet(bitmap, session.getNomUsuario(),
+                    nomUsuario[0], tuit, 0));
+            Intent intent = new Intent(this, TimeLineActivity.class);
+            startActivity(intent);
+        }
     }
 
     public Bitmap getImage(){

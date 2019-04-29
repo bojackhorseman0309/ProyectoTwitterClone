@@ -34,7 +34,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
     public void modificarCorreo(View view) {
-        conn = data.getWritableDatabase();
         String correo = ((EditText) findViewById(R.id.etCorreoConfig)).getText().toString();
         if (correo.isEmpty() || correo == null) {
             Toast.makeText(this, R.string.toastNoNull, Toast.LENGTH_SHORT).show();
@@ -42,9 +41,15 @@ public class ConfiguracionActivity extends AppCompatActivity {
             if (!emailValido(correo)) {
                 Toast.makeText(this, R.string.toastRegActEmail, Toast.LENGTH_SHORT).show();
             } else {
+                modificarTweet(correo);
+                modificaMensaje(correo);
+                modificaMensajeDos(correo);
+                modificaAmigo(correo);
+                modificaAmigoDos(correo);
+                conn = data.getWritableDatabase();
                 ContentValues registro = new ContentValues();
                 registro.put("correo", correo);
-                int n = conn.update("usuario", registro, "correo = + '"+session.getNomUsuario().trim()+"'" , null);
+                int n = conn.update("usuario", registro, "correo = + '" + session.getNomUsuario().trim() + "'", null);
                 session.setNomUsuario(correo);
                 conn.close();
                 if (n == 1) {
@@ -59,6 +64,85 @@ public class ConfiguracionActivity extends AppCompatActivity {
         conn.close();
     }
 
+    public void modificarTweet(String correo) {
+
+        conn = data.getWritableDatabase();
+        ContentValues registro = new ContentValues();
+        String[] nomUsuario = correo.split("@");
+        registro.put("nombre", correo);
+        registro.put("aliasUsuario", nomUsuario[0]);
+        int n = conn.update("tweet", registro, "nombre = + '" + session.getNomUsuario().trim() + "'", null);
+        conn.close();
+        if (n == 1) {
+            //Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
+        }
+        //conn.close();
+    }
+
+    public void modificaMensaje(String correo) {
+        conn = data.getWritableDatabase();
+        ContentValues registro = new ContentValues();
+        String[] nomUsuario = correo.split("@");
+        registro.put("nombre", correo);
+        registro.put("idUsuario", nomUsuario[0]);
+        int n = conn.update("mensaje", registro, "nombre = + '" + session.getNomUsuario().trim() + "'", null);
+        conn.close();
+        if (n == 1) {
+            //Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
+        }
+        //conn.close();
+    }
+
+    public void modificaMensajeDos(String correo) {
+        conn = data.getWritableDatabase();
+        ContentValues registro = new ContentValues();
+        registro.put("origen", correo);
+        int n = conn.update("mensaje", registro, "origen = + '" + session.getNomUsuario().trim() + "'", null);
+        conn.close();
+        if (n == 1) {
+            //Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
+        }
+        //conn.close();
+    }
+
+    //int n = conn.delete("amigo", " correoSesion = + '" + session.getNomUsuario().trim() + "' "
+    //                    + " AND correoAmigo =+ '" + session.getAmigo().trim() + "'", null);
+
+    public void modificaAmigo(String correo) {
+        conn = data.getWritableDatabase();
+        ContentValues registro = new ContentValues();
+        registro.put("correoSesion", correo);
+        int n = conn.update("amigo", registro, "correoSesion = + '" + session.getNomUsuario().trim() + "'", null);
+        conn.close();
+        if (n == 1) {
+            //Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
+        }
+        //conn.close();
+    }
+
+    public void modificaAmigoDos(String correo) {
+        conn = data.getWritableDatabase();
+        ContentValues registro = new ContentValues();
+        registro.put("correoAmigo", correo);
+        int n = conn.update("amigo", registro, "correoAmigo = + '" + session.getNomUsuario().trim() + "'", null);
+        conn.close();
+        if (n == 1) {
+            //Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
+        }
+        //conn.close();
+    }
+
+
     private static boolean emailValido(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
@@ -69,15 +153,15 @@ public class ConfiguracionActivity extends AppCompatActivity {
         if (pwd.isEmpty() || pwd == null) {
             Toast.makeText(this, R.string.toastNoNull, Toast.LENGTH_SHORT).show();
         } else {
-                ContentValues registro = new ContentValues();
-                registro.put("contrasenha", pwd);
-                int n = conn.update("usuario", registro, "correo = + '"+session.getNomUsuario().trim()+"'", null);
-                conn.close();
-                if (n == 1) {
-                    Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
-                }
+            ContentValues registro = new ContentValues();
+            registro.put("contrasenha", pwd);
+            int n = conn.update("usuario", registro, "correo = + '" + session.getNomUsuario().trim() + "'", null);
+            conn.close();
+            if (n == 1) {
+                Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
+            }
         }
         conn.close();
     }
@@ -88,6 +172,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_PICK);
         startActivityForResult(Intent.createChooser(intent, "Seleccionar Imagen"), 71);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent datas) {
         super.onActivityResult(requestCode, resultCode, datas);
@@ -114,20 +199,20 @@ public class ConfiguracionActivity extends AppCompatActivity {
     public void modificarImagen(byte[] imagen) {
 
         conn = data.getWritableDatabase();
-                ContentValues registro = new ContentValues();
-                registro.put("imagen", imagen);
-                int n = conn.update("usuario", registro, "correo = + '"+session.getNomUsuario().trim()+"'" , null);
-                conn.close();
-                if (n == 1) {
-                    Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
-                }
+        ContentValues registro = new ContentValues();
+        registro.put("imagen", imagen);
+        int n = conn.update("usuario", registro, "correo = + '" + session.getNomUsuario().trim() + "'", null);
+        conn.close();
+        if (n == 1) {
+            Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
+        }
         conn.close();
     }
 
-    public void cerrarSesion(View view){
-        Intent intent = new Intent(this, TimeLineActivity.class);
+    public void cerrarSesion(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
         session.setAmigo(null);
         session.setContra(null);
         session.setNomUsuario(null);

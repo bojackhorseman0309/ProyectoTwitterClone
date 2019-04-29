@@ -35,4 +35,6 @@
     <string name="toastNoSePudo">No se pudo realizar la operación</string>
     <string name="btCerrarSesion">Cerrar Sesión</string>
     <string name="toastYaLoSeguis">Ya estas siguiendo a esta persona</string>
+    <string name="toastEliminaAmigo">Has dejado de seguirlo</string>
+    <string name="toastEliminaNoAmigo">No se puede dejar de seguir a alguien que no seguis</string>
 </resources>
