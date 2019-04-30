@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">TwitterAlonso</string>
+    <string name="app_name">Twitter Alonso</string>
     <string name="btRegistrarse">Registrarse</string>
     <string name="btIniciarSesion">Iniciar Sesion</string>
     <string name="tvBienvenidos">Bienvenidos</string>
     <string name="tvCorreoIS">Correo: </string>
     <string name="tvContraIS">Contraseña: </string>
-    <string name="title_activity_time_line">TimeLineActivity</string>
+    <string name="title_activity_time_line">Twitter Alonso</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Buscar</string>
     <string name="title_notifications">Notificaciones</string>
@@ -38,4 +38,8 @@
     <string name="toastEliminaAmigo">Has dejado de seguirlo</string>
     <string name="toastEliminaNoAmigo">No se puede dejar de seguir a alguien que no seguis</string>
     <string name="tvNotif">Notificaciones</string>
+    <string name="tvNombreBusc">Nombre de usuario</string>
+    <string name="tvTuitTitle">Tweet:</string>
+    <string name="tvDest">Destinatario</string>
+    <string name="tvMensajetv">Mensaje</string>
 </resources>

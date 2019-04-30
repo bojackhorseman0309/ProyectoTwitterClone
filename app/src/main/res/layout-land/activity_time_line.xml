@@ -21,8 +21,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvTimeline"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="715dp"
+        android:layout_height="342dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
