@@ -6,12 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -23,12 +27,48 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private SQLiteDatabase conn;
     private Session session;
     private Uri filePath;
+    private TextView mTextMessage;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navHome:
+                    Intent home = new Intent(getApplicationContext(), TimeLineActivity.class);
+                    startActivity(home);
+                    return true;
+                case R.id.navBuscar:
+                    Intent intBuscar = new Intent(getApplicationContext(), BuscarActivity.class);
+                    startActivity(intBuscar);
+                    return true;
+                case R.id.navNotif:
+                    Intent intNotif = new Intent(getApplicationContext(), NotificacionesActivity.class);
+                    startActivity(intNotif);
+                    return true;
+                case R.id.navMensajes:
+                    Intent intMensaje = new Intent(getApplicationContext(), MensajesActivity.class);
+                    startActivity(intMensaje);
+                    return true;
+                case R.id.miConfig:
+                    Intent intConfig = new Intent(getApplicationContext(), ConfiguracionActivity.class);
+                    startActivity(intConfig);
+                    return true;
+            }
+            return false;
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
-
+        mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView)findViewById(R.id.bottomNavConfig);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.getMenu().findItem(R.id.miConfig).setChecked(true);
         session = new Session(getApplicationContext());
         data = new TwitterDB(this, "datos", null, 1);
     }
@@ -58,10 +98,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
                     Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
                 }
             }
-
         }
-
-        conn.close();
     }
 
     public void modificarTweet(String correo) {
@@ -163,7 +200,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
             }
         }
-        conn.close();
     }
 
     public void subir(View view) {

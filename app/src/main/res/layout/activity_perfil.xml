@@ -8,9 +8,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPerfil"
-        android:layout_width="401dp"
-        android:layout_height="674dp"
+        android:layout_width="398dp"
+        android:layout_height="612dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNombrePerfil" />
 
@@ -19,12 +20,12 @@
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#3F51B5"
         android:clickable="true"
         android:onClick="añadirAmigo"
         android:src="@android:drawable/ic_input_add"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavPerf"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@tools:sample/avatars[2]" />
 
@@ -42,11 +43,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="#3F51B4"
         android:clickable="true"
         android:onClick="eliminarAmigo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavPerf"
         app:layout_constraintEnd_toStartOf="@+id/floatAñadir"
         app:srcCompat="@android:drawable/ic_delete" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavPerf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation" />
+
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.twitteralonso;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -8,11 +9,14 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class MandarMensajeActivity extends AppCompatActivity {
 
@@ -43,6 +47,8 @@ public class MandarMensajeActivity extends AppCompatActivity {
             } else{
                 String[] nomUsuario = session.getNomUsuario().split("@");
                 insertarMensaje(dest, mensj, nomUsuario[0]);
+                Intent intent = new Intent(this, MensajesActivity.class);
+                startActivity(intent);
             }
 
         }
@@ -67,13 +73,14 @@ public class MandarMensajeActivity extends AppCompatActivity {
 
     public void insertarMensaje(String dest, String mensj, String idUsuario) {
         conn = data.getWritableDatabase();
+        String timeStamp = new SimpleDateFormat("MMMM dd").format(Calendar.getInstance().getTime());
         ContentValues registro = new ContentValues();
         Bitmap bitmap = getImage();
         byte[] imagen = getBitmapAsByteArray(bitmap);
         registro.put("imagen", imagen);
         registro.put("nombre", session.getNomUsuario());
         registro.put("idUsuario", idUsuario);
-        registro.put("fecha", "hoy");
+        registro.put("fecha", timeStamp);
         registro.put("mensaje", mensj);
         registro.put("origen", dest);
         conn.insert("mensaje", null, registro);
