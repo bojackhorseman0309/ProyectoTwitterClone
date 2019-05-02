@@ -8,12 +8,12 @@
 
     <TextView
         android:id="@+id/tvTitutloMM"
-        android:layout_width="268dp"
-        android:layout_height="50dp"
+        android:layout_width="120dp"
+        android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/tvMandarMTit"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_width="395dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +30,8 @@
 
     <EditText
         android:id="@+id/etMensajeMM"
-        android:layout_width="397dp"
-        android:layout_height="185dp"
+        android:layout_width="418dp"
+        android:layout_height="124dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
         android:ems="10"
@@ -43,8 +43,8 @@
         android:id="@+id/btMandarMensjMM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="136dp"
         android:onClick="mandarMensaje"
         android:text="@string/btEnviarMensj"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +55,7 @@
         android:layout_width="85dp"
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="@string/tvDest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitutloMM" />
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="@string/tvMensajetv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDestinatarioMM" />

@@ -2,7 +2,7 @@
     <string name="app_name">Twitter Alonso</string>
     <string name="btRegistrarse">Registrarse</string>
     <string name="btIniciarSesion">Iniciar Sesion</string>
-    <string name="tvBienvenidos">Bienvenidos</string>
+    <string name="tvBienvenidos">Bienvenido</string>
     <string name="tvCorreoIS">Correo: </string>
     <string name="tvContraIS">Contraseña: </string>
     <string name="title_activity_time_line">Twitter Alonso</string>
@@ -22,7 +22,7 @@
     <string name="toastNoHayRegistros">No hay registros de este usuario</string>
     <string name="toastAgregaSeguidor">Ahora sigues este perfil</string>
     <string name="nuevoTuitDe">Nuevo tuit de: %s</string>
-    <string name="tvMandarMTit">Mandar Mensaje</string>
+    <string name="tvMandarMTit">Mensaje</string>
     <string name="btEnviarMensj">Enviar</string>
     <string name="toastRegistroMensaje">Su mensaje se ha enviado</string>
     <string name="miConfig">Configuración</string>

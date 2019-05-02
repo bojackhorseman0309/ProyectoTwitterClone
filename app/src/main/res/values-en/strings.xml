@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Twitter Alonso</string>
+    <string name="btBuscar">Search User</string>
+    <string name="btCambCorreo">Save E-Mail</string>
+    <string name="btCambImagen">Change Profile Picture</string>
+    <string name="btCambPwd">Save Password</string>
+    <string name="btCerrarSesion">Sign Out</string>
+    <string name="btEnviarMensj">Send</string>
+    <string name="btIniciarSesion">Sign In</string>
+    <string name="btRegistrarse">Sign Up</string>
+    <string name="btTwittear">Tweet</string>
+    <string name="miConfig">Configuration</string>
+    <string name="navMensajes">Messages</string>
+    <string name="nuevoTuitDe">New tweet from: %s</string>
+    <string name="title_activity_time_line">Twitter Alonso</string>
+    <string name="title_dashboard">Search</string>
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="toastAgregaSeguidor">Now you follow this profile</string>
+    <string name="toastEliminaAmigo">You have unfollowed this profile</string>
+    <string name="toastEliminaNoAmigo">You can unfollow someone who you are not following</string>
+    <string name="toastNoCoincide">Data doesn\'t match</string>
+    <string name="toastNoHayRegistros">There\'s no registry for this user</string>
+    <string name="toastNoNull">Empty spaces not allowed</string>
+    <string name="toastNoSePudo">Impossible Operation</string>
+    <string name="toastRegAct">You have been registered</string>
+    <string name="toastRegActEmail">Invalid E-Mail Format</string>
+    <string name="toastRegistroMensaje">Your message has been sent</string>
+    <string name="toastUsuarioExiste">There\'s already a registered user with this e-mail</string>
+    <string name="toastYaLoSeguis">You are already following this profile</string>
+    <string name="tvBienvenidos">Welcome</string>
+    <string name="tvBuscar">Search Friend</string>
+    <string name="tvCambCorreo">Change E-Mail:</string>
+    <string name="tvCambPwd">Change Password:</string>
+    <string name="tvContraIS">Password:</string>
+    <string name="tvCorreoIS">E-Mail:</string>
+    <string name="tvDest">Addressee</string>
+    <string name="tvMandarMTit">Messages</string>
+    <string name="tvMensajetv">Messages</string>
+    <string name="tvNombreBusc">UserName</string>
+    <string name="tvNotif">Notifications</string>
+    <string name="tvTituloIniSesh">Sign In</string>
+    <string name="tvTuitTitle">"Tweet: "</string>
+    <string name="tvTweet">Write Tweet</string>
+</resources>

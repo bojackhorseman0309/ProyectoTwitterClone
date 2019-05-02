@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/miConfig"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,44 +63,44 @@
         android:id="@+id/btCambCorreoConf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
         android:onClick="modificarCorreo"
         android:text="@string/btCambCorreo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPwdConfig" />
+        app:layout_constraintStart_toEndOf="@+id/etCorreoConfig"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btCambPwdConf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
         android:onClick="modificarPwd"
         android:text="@string/btCambPwd"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etPwdConfig"
         app:layout_constraintTop_toBottomOf="@+id/btCambCorreoConf" />
 
     <Button
         android:id="@+id/btCambImagenConf"
         android:layout_width="wrap_content"
         android:layout_height="52dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="subir"
         android:text="@string/btCambImagen"
-        app:layout_constraintStart_toEndOf="@+id/btCambPwdConf"
-        app:layout_constraintTop_toBottomOf="@+id/btCerrarSesion" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPwdConfig" />
 
     <Button
         android:id="@+id/btCerrarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="cerrarSesion"
         android:text="@string/btCerrarSesion"
-        app:layout_constraintStart_toEndOf="@+id/btCambCorreoConf"
+        app:layout_constraintStart_toEndOf="@+id/btCambImagenConf"
         app:layout_constraintTop_toBottomOf="@+id/etPwdConfig" />
 
     <android.support.design.widget.BottomNavigationView

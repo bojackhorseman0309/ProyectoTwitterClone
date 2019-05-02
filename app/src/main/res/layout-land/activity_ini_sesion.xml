@@ -10,10 +10,10 @@
         android:id="@+id/tvCorreoIS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="308dp"
+        android:layout_marginStart="340dp"
         android:layout_marginTop="20dp"
         android:text="@string/tvCorreoIS"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -32,10 +32,10 @@
         android:id="@+id/tvContraIS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
+        android:layout_marginStart="324dp"
         android:layout_marginTop="12dp"
         android:text="@string/tvContraIS"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCorreoIS" />
 
@@ -54,7 +54,8 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="292dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="4dp"
         android:onClick="iniciarSesionVerifica"
         android:text="@string/btIniciarSesion"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,21 +63,21 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="264dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="96dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="76dp"
         android:text="@string/btIniciarSesion"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="78dp"
-        android:layout_height="69dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"

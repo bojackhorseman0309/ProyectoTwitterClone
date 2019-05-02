@@ -4,48 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EscribirTweetActivity">
+    tools:context=".BuscarActivity">
 
     <TextView
-        android:id="@+id/tvTituloEscTw"
+        android:id="@+id/tvBuscarTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/tvTweet"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="@string/tvBuscar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etTweetEscTw"
-        android:layout_width="366dp"
-        android:layout_height="104dp"
+        android:id="@+id/etBuscarBA"
+        android:layout_width="392dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="44dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTuitTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBuscarTitle" />
 
     <Button
-        android:id="@+id/btTuitear"
+        android:id="@+id/btBuscarUsuarioBA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="tuitear"
-        android:text="@string/btTwittear"
+        android:layout_marginTop="20dp"
+        android:onClick="buscarUsuario"
+        android:text="@string/btBuscar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTweetEscTw" />
+        app:layout_constraintTop_toBottomOf="@+id/etBuscarBA" />
 
     <TextView
-        android:id="@+id/tvTuitTitle"
-        android:layout_width="66dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/tvTuitTitle"
+        android:id="@+id/tvNomBusc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/tvNombreBusc"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTituloEscTw" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBuscarTitle" />
+
 </android.support.constraint.ConstraintLayout>

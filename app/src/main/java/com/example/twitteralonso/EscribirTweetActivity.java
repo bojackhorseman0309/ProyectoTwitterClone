@@ -79,7 +79,7 @@ public class EscribirTweetActivity extends AppCompatActivity {
 
         conn.insert("tweet", null, registro);
         conn.close();
-        Toast.makeText(this, "Se ingresó un tweet", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Se ingresó un tweet", Toast.LENGTH_SHORT).show();
     }
 
     public static byte[] getBitmapAsByteArray(Bitmap bitmap) {

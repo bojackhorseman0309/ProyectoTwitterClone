@@ -233,7 +233,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     }
 
     public void modificarImagen(byte[] imagen) {
-
+        modificaMensajeImagen(imagen);
         conn = data.getWritableDatabase();
         ContentValues registro = new ContentValues();
         registro.put("imagen", imagen);
@@ -246,6 +246,22 @@ public class ConfiguracionActivity extends AppCompatActivity {
         }
         conn.close();
     }
+
+    public void modificaMensajeImagen(byte[] imagen) {
+        conn = data.getWritableDatabase();
+        ContentValues registro = new ContentValues();
+        registro.put("imagen", imagen);
+        int n = conn.update("mensaje", registro, "nombre = + '" + session.getNomUsuario().trim() + "'", null);
+        conn.close();
+        if (n == 1) {
+            //Toast.makeText(this, R.string.toastRegAct, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.toastNoSePudo, Toast.LENGTH_SHORT).show();
+        }
+        //conn.close();
+    }
+
+
 
     public void cerrarSesion(View view) {
         Intent intent = new Intent(this, MainActivity.class);
