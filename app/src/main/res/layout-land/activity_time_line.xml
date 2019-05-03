@@ -21,8 +21,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvTimeline"
-        android:layout_width="715dp"
-        android:layout_height="342dp"
+        android:layout_width="701dp"
+        android:layout_height="339dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
@@ -32,7 +32,7 @@
         android:id="@+id/floatBtEscribir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/colorPrimary"
         android:clickable="true"

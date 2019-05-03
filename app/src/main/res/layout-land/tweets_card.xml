@@ -6,9 +6,9 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/tuitPerfAct"
-        android:layout_width="392dp"
-        android:layout_height="179dp"
+        android:id="@+id/tuit"
+        android:layout_width="714dp"
+        android:layout_height="158dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:cardCornerRadius="4dp"
@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/ivPerfilPerfAct"
-                android:layout_width="74dp"
-                android:layout_height="90dp"
+                android:layout_width="59dp"
+                android:layout_height="64dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
@@ -53,23 +53,25 @@
 
             <ImageView
                 android:id="@+id/ivShareCardPerfAct"
-                android:layout_width="49dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="61dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTuitContCardPerfAct"
                 app:srcCompat="@android:drawable/ic_menu_share" />
 
             <TextView
                 android:id="@+id/tvTuitContCardPerfAct"
-                android:layout_width="280dp"
-                android:layout_height="66dp"
+                android:layout_width="619dp"
+                android:layout_height="51dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
                 android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/ivPerfilPerfAct"
                 app:layout_constraintTop_toBottomOf="@+id/tvIdPerfCardPerfAct" />
         </android.support.constraint.ConstraintLayout>
